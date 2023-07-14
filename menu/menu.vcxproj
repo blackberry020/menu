@@ -128,12 +128,20 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AbstractPage.cpp" />
+    <ClCompile Include="FolderPage.cpp" />
+    <ClCompile Include="IndicatorPage.cpp" />
+    <ClCompile Include="IntParameterPage.cpp" />
     <ClCompile Include="menu.cpp" />
     <ClCompile Include="MenuInterface.cpp" />
+    <ClCompile Include="ParameterPage.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AbstractPage.h" />
+    <ClInclude Include="FolderPage.h" />
+    <ClInclude Include="IndicatorPage.h" />
+    <ClInclude Include="IntParameterPage.h" />
     <ClInclude Include="MenuInterface.h" />
+    <ClInclude Include="ParameterPage.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

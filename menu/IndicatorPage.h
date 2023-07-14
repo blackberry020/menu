@@ -1,7 +1,9 @@
 #pragma once
 #include "AbstractPage.h"
-class IndicatorPage :
-    public AbstractPage
+template<class T>
+class IndicatorPage : public AbstractPage
 {
+public :
+	T value;
 };
 

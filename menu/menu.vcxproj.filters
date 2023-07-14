@@ -24,12 +24,36 @@
     <ClCompile Include="MenuInterface.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="FolderPage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="IndicatorPage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ParameterPage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="IntParameterPage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MenuInterface.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="AbstractPage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FolderPage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IndicatorPage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ParameterPage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IntParameterPage.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
