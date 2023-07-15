@@ -127,21 +127,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AbstractPage.cpp" />
-    <ClCompile Include="FolderPage.cpp" />
-    <ClCompile Include="IndicatorPage.cpp" />
-    <ClCompile Include="IntParameterPage.cpp" />
+    <ClCompile Include="AbstractElement.cpp" />
+    <ClCompile Include="FolderElement.cpp" />
+    <ClCompile Include="IndicatorElement.cpp" />
+    <ClCompile Include="IntParameterElement.cpp" />
     <ClCompile Include="menu.cpp" />
     <ClCompile Include="MenuInterface.cpp" />
-    <ClCompile Include="ParameterPage.cpp" />
+    <ClCompile Include="ParameterElement.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AbstractPage.h" />
-    <ClInclude Include="FolderPage.h" />
-    <ClInclude Include="IndicatorPage.h" />
-    <ClInclude Include="IntParameterPage.h" />
+    <ClInclude Include="AbstractElement.h" />
+    <ClInclude Include="FolderElement.h" />
+    <ClInclude Include="IndicatorElement.h" />
+    <ClInclude Include="IntParameterElement.h" />
     <ClInclude Include="MenuInterface.h" />
-    <ClInclude Include="ParameterPage.h" />
+    <ClInclude Include="ParameterElement.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

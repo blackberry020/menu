@@ -1,15 +1,17 @@
 #pragma once
-#include "AbstractPage.h"
+#include "AbstractElement.h"
+#include <stack>
+#include "FolderElement.h"
+
+enum Key {
+
+};
 
 class MenuInterface
 {
-	AbstractPage* curPage = nullptr;
-	virtual void updatePage() = 0;
-	virtual void onRightArrow() = 0;
-	virtual void onLeftArrow() = 0;
-	virtual void onDownArrow() = 0;
-	virtual void onUpArrow() = 0;
-	virtual void onEsc() = 0;
-	virtual void onEnter() = 0;
+	virtual void keyPressed(Key) = 0;
+	bool isEditMode;
+	stack <FolderElement*> openedFoldersSequence;
+	virtual void update() = 0;
 };
 

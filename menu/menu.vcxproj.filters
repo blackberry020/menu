@@ -18,22 +18,22 @@
     <ClCompile Include="menu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AbstractPage.cpp">
+    <ClCompile Include="AbstractElement.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MenuInterface.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="FolderPage.cpp">
+    <ClCompile Include="FolderElement.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="IndicatorPage.cpp">
+    <ClCompile Include="IndicatorElement.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ParameterPage.cpp">
+    <ClCompile Include="ParameterElement.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="IntParameterPage.cpp">
+    <ClCompile Include="IntParameterElement.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -41,19 +41,19 @@
     <ClInclude Include="MenuInterface.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AbstractPage.h">
+    <ClInclude Include="AbstractElement.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="FolderPage.h">
+    <ClInclude Include="FolderElement.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IndicatorPage.h">
+    <ClInclude Include="IndicatorElement.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ParameterPage.h">
+    <ClInclude Include="ParameterElement.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IntParameterPage.h">
+    <ClInclude Include="IntParameterElement.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
