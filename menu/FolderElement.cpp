@@ -8,13 +8,14 @@ bool FolderElement::isEditable() {
 	return false;
 }
 
+
+// Display a current child
 std::string FolderElement::getContent() {
-	//!!!!!
-	return "CCC";
+	return getCurSubElement()->getContent();
 }
+
 
 void FolderElement::saveValueChanges()
 {
-	// save child!!!!
-	getCurSubElement()->saveValueChanges();
+	// nothing to save, because cannot edit folder
 }

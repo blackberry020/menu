@@ -3,14 +3,13 @@
 template<class T>
 class IndicatorElement : public AbstractElement
 {
-public :
+private:
 	T value;
+public :
+	
+	std::string getContent() override;
 
-	bool isEditable() override {
-		return false;
-	};
-	bool isOpenable() override {
-		return false;
-	};
+	// attrs
+	bool isEditable() override;
+	bool isOpenable() override;
 };
-

@@ -6,6 +6,12 @@
 class AbstractElement
 {
 
+private:
+	std::string elementName;
+	std::vector <AbstractElement*> subElements;
+	int amountOfSubElements;
+	int curIndexOfSubElement;
+
 public :
 
 	virtual std::string getContent() = 0;
@@ -39,10 +45,5 @@ public :
 
 	virtual ~AbstractElement() = 0;
 
-private:
-	std::string elementName;
-	std::vector <AbstractElement*> subElements;
-	int amountOfSubElements;
-	int curIndexOfSubElement;
 };
 

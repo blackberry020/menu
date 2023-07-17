@@ -29,25 +29,25 @@ void MenuInterface::keyPressed(Key key) {
 		switch (key)
 		{
 			case Key::Up:
-				curElement->incCurValueDigit();
+				curElement->getCurSubElement()->incCurValueDigit();
 				break;
 
 			case Key::Down:
-				curElement->decCurValueDigit();
+				curElement->getCurSubElement()->decCurValueDigit();
 				break;
 
 			// 1[0]0 Maybe (right = decrease digit) ? 10[0] ????
 			case Key::Right:
-				curElement->incDigit();
+				curElement->getCurSubElement()->incDigit();
 				break;
 
 			// same as with Right
 			case Key::Left:
-				curElement->decDigit();
+				curElement->getCurSubElement()->decDigit();
 				break;
 
 			case Key::Escape:
-				curElement->saveValueChanges();
+				curElement->getCurSubElement()->saveValueChanges();
 				break;
 
 			// ????

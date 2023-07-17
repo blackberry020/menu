@@ -136,6 +136,7 @@
     <ClCompile Include="OutputDevice.cpp" />
     <ClCompile Include="ParameterElement.cpp" />
     <ClCompile Include="SettingsStorage.cpp" />
+    <ClCompile Include="StrConverter.cpp" />
     <ClCompile Include="Win32Menu.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -147,6 +148,7 @@
     <ClInclude Include="OutputDevice.h" />
     <ClInclude Include="ParameterElement.h" />
     <ClInclude Include="SettingsStorage.h" />
+    <ClInclude Include="StrConverter.h" />
     <ClInclude Include="Win32Menu.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

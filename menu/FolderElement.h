@@ -6,6 +6,7 @@ class FolderElement :
 public:
     std::string getContent() override;
 
+    // attrs
     bool isEditable() override;
     bool isOpenable() override;
 
