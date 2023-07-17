@@ -15,7 +15,11 @@ public :
 
 	std::string getContent() override;
 
+	void injectStorage(SettingsStorageInterface* storageInterface);
+
 	// attrs
 	bool isEditable() override;
 	bool isOpenable() override;
+
+	
 };

@@ -16,3 +16,9 @@ bool IndicatorElement<T>::isOpenable()
 {
 	return false;
 }
+
+template<class T>
+void IndicatorElement<T>::injectStorage(SettingsStorageInterface* storageInterface)
+{
+	storage = storageInterface;
+}

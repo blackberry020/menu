@@ -1,7 +1,13 @@
 #include "AbstractElement.h"
 
-AbstractElement::AbstractElement(std::string name) : elementName(name)
+AbstractElement::AbstractElement(std::string name) : elementName(name), curIndexOfSubElement(0)
 {
+
+}
+
+AbstractElement::AbstractElement(std::string name, SettingsStorageInterface* storageInterface) : AbstractElement(name)
+{
+	injectStorage(storageInterface);
 }
 
 std::string AbstractElement::getElementName() {
@@ -39,6 +45,14 @@ void AbstractElement::goPrevElement() {
 
 void AbstractElement::goNextElement() {
 	if (curIndexOfSubElement != amountOfSubElements - 1) curIndexOfSubElement--;
+}
+
+void AbstractElement::injectStorage(SettingsStorageInterface* storageInterface)
+{
+	storage = storageInterface;
+	for (AbstractElement* el : subElements) {
+		el->injectStorage(storage);
+	}
 }
 
 // for sub elements !!!
