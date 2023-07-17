@@ -1,9 +1,10 @@
 #include "ParameterElement.h"
 
-bool ParameterElement::isOpenable() {
+template <class T> bool ParameterElement<T>::isOpenable() {
 	return true;
 }
 
-bool ParameterElement::isEditable() {
+
+template <class T> bool ParameterElement<T>::isEditable() {
 	return false;
 }

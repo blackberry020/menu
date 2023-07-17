@@ -133,7 +133,10 @@
     <ClCompile Include="IntParameterElement.cpp" />
     <ClCompile Include="menu.cpp" />
     <ClCompile Include="MenuInterface.cpp" />
+    <ClCompile Include="OutputDevice.cpp" />
     <ClCompile Include="ParameterElement.cpp" />
+    <ClCompile Include="SettingsStorage.cpp" />
+    <ClCompile Include="Win32Menu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AbstractElement.h" />
@@ -141,7 +144,10 @@
     <ClInclude Include="IndicatorElement.h" />
     <ClInclude Include="IntParameterElement.h" />
     <ClInclude Include="MenuInterface.h" />
+    <ClInclude Include="OutputDevice.h" />
     <ClInclude Include="ParameterElement.h" />
+    <ClInclude Include="SettingsStorage.h" />
+    <ClInclude Include="Win32Menu.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

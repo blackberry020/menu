@@ -2,9 +2,12 @@
 #include "AbstractElement.h"
 class FolderElement :
     public AbstractElement
-{
-    string getContent() override;
+{   
+public:
+    std::string getContent() override;
 
     bool isEditable() override;
     bool isOpenable() override;
+
+    void saveValueChanges() override;
 };

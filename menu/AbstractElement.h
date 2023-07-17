@@ -3,31 +3,43 @@
 #include <iostream>
 #include <vector>
 
-using namespace std;
-
 class AbstractElement
 {
 
 public :
 
-	string elementName;
-	const string getInstructions();
-	virtual string getContent() = 0;
+	std::string elementName;
+	const std::string getInstructions();
 
-	virtual ~AbstractElement() = 0;
+	virtual std::string getContent() = 0;
 
-	void incAmountOfChildrenPages() {
-		amountOfSubElements++;
-	};
-
+	// attrs
 	virtual bool isEditable() = 0;
 	virtual bool isOpenable() = 0;
 
-	virtual void incCurValueDigit() {};
-	virtual void decCurValueDigit() {};
-	virtual void incDigit() {};
-	virtual void decDigit() {};
-	virtual void saveValueChanges() {};
+
+	//functions
+
+	virtual void incCurValueDigit() {
+		// no reaction by default
+	};
+
+	virtual void decCurValueDigit() {
+		// no reaction by default
+	};
+
+	virtual void incDigit() {
+		// no reaction by default
+	};
+
+	virtual void decDigit() {
+		// no reaction by default
+	};
+
+	virtual void saveValueChanges() {
+		// no reaction by default
+	};
+
 
 	AbstractElement* getCurSubElement() {
 		return subElements[curIndexOfSubElement];
@@ -41,12 +53,25 @@ public :
 		if (curIndexOfSubElement != amountOfSubElements - 1) curIndexOfSubElement--;
 	}
 
+	// for sub elements !!!
 	bool requestEditMode() {
-		return subElements[curIndexOfSubElement]->isEditable();
+		return getCurSubElement()->isEditable();
 	}
 
+	// for sub elements !!!
+	bool requestOpenSubElement() {
+		return getCurSubElement()->isOpenable();
+	}
+
+	void incAmountOfChildrenPages() {
+		amountOfSubElements++;
+	};
+
+
+	virtual ~AbstractElement() = 0;
+
 private:
-	vector <AbstractElement*> subElements;
+	std::vector <AbstractElement*> subElements;
 	int amountOfSubElements;
 	int curIndexOfSubElement;
 };

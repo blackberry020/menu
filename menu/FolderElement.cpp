@@ -8,6 +8,14 @@ bool FolderElement::isEditable() {
 	return false;
 }
 
-string FolderElement::getContent() {
-	return ;
+std::string FolderElement::getContent() {
+	//!!!!!
+	return "CCC";
+}
+
+void FolderElement::saveValueChanges()
+{
+	// save child!!!!
+
+
 }
