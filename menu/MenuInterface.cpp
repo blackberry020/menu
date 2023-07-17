@@ -1,11 +1,28 @@
 #include "MenuInterface.h"
 
+// collect data from models
+// update output device state;
 void MenuInterface::update() {
-	// collect data from models
-	// update output device state;
-	outputDevice->onUpdate(openedElementsSequence.top()->getContent());
+	
+	outputDevice->onUpdate(
+		getInstructions() + 
+		"\n" + openedElementsSequence.top()->getContent()
+	);
 }
 
+// By default, edit mode is false (when device started)
+MenuInterface::MenuInterface(OutputDevice * device) : outputDevice(device), isEditMode(false) {
+
+}
+
+const std::string MenuInterface::getInstructions() {
+	return "use arrows for navigation:" \
+		"\n left and right for moving between folders on the same level, " \
+		"\n down and up for moving between layers" \
+		"\n enter to edit a value" \
+		"\n ESC to undo changes in value"
+		"\n and arrows for editing value's digits";
+}
 void MenuInterface::keyPressed(Key key) {
 	AbstractElement* curElement = openedElementsSequence.top();
 	if (isEditMode) {
@@ -19,12 +36,12 @@ void MenuInterface::keyPressed(Key key) {
 				curElement->decCurValueDigit();
 				break;
 
-			// 1[0]0 Maybe right = decrease digit? 10[0] ????
+			// 1[0]0 Maybe (right = decrease digit) ? 10[0] ????
 			case Key::Right:
 				curElement->incDigit();
 				break;
 
-			// same
+			// same as with Right
 			case Key::Left:
 				curElement->decDigit();
 				break;

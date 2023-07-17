@@ -16,6 +16,5 @@ std::string FolderElement::getContent() {
 void FolderElement::saveValueChanges()
 {
 	// save child!!!!
-
-
+	getCurSubElement()->saveValueChanges();
 }

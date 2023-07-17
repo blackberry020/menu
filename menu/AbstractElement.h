@@ -8,9 +8,6 @@ class AbstractElement
 
 public :
 
-	std::string elementName;
-	const std::string getInstructions();
-
 	virtual std::string getContent() = 0;
 
 	// attrs
@@ -20,57 +17,30 @@ public :
 
 	//functions
 
-	virtual void incCurValueDigit() {
-		// no reaction by default
-	};
+	std::string getElementName();
 
-	virtual void decCurValueDigit() {
-		// no reaction by default
-	};
+	virtual void incCurValueDigit();
+	virtual void decCurValueDigit();
+	virtual void incDigit();
+	virtual void decDigit();
 
-	virtual void incDigit() {
-		// no reaction by default
-	};
+	virtual void saveValueChanges();
 
-	virtual void decDigit() {
-		// no reaction by default
-	};
+	AbstractElement* getCurSubElement();
 
-	virtual void saveValueChanges() {
-		// no reaction by default
-	};
-
-
-	AbstractElement* getCurSubElement() {
-		return subElements[curIndexOfSubElement];
-	}
-
-	void goPrevElement() {
-		if (curIndexOfSubElement) curIndexOfSubElement--;
-	}
-
-	void goNextElement() {
-		if (curIndexOfSubElement != amountOfSubElements - 1) curIndexOfSubElement--;
-	}
+	void goPrevElement();
+	void goNextElement();
 
 	// for sub elements !!!
-	bool requestEditMode() {
-		return getCurSubElement()->isEditable();
-	}
+	bool requestEditMode();
+	bool requestOpenSubElement();
 
-	// for sub elements !!!
-	bool requestOpenSubElement() {
-		return getCurSubElement()->isOpenable();
-	}
-
-	void incAmountOfChildrenPages() {
-		amountOfSubElements++;
-	};
-
+	void incAmountOfChildrenPages();
 
 	virtual ~AbstractElement() = 0;
 
 private:
+	std::string elementName;
 	std::vector <AbstractElement*> subElements;
 	int amountOfSubElements;
 	int curIndexOfSubElement;

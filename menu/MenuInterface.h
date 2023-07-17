@@ -11,16 +11,27 @@ enum class Key {
 class MenuInterface
 {	
 public:
-	MenuInterface(OutputDevice* device) : outputDevice(device) { }
+	explicit MenuInterface(OutputDevice* device);
 protected:
-	bool isEditMode;
-	OutputDevice* outputDevice;
+
+	// Method, which provide outputDevice an output;
+	void update();
+
+	// Method, which calls when key is Pressed.
+	// With default binding
+	virtual void keyPressed(Key);
+
+	virtual const std::string getInstructions();
+
+	virtual ~MenuInterface() = 0;
+private:
 
 	// abstract element also can have a sub element;
 	std::stack <AbstractElement*> openedElementsSequence;
 
-	void update();
-	virtual void keyPressed(Key);
-	virtual ~MenuInterface() = 0;
+	OutputDevice* outputDevice;
+
+	bool isEditMode;
+	
 };
 

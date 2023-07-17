@@ -1,16 +1,16 @@
 #pragma once
 #include <string>
 #include <functional>
-class SettingsStorage
-{	
-	template <class T>
-	void saveValue(std::string& id, T value) {
-		
-	}
 
-	template <class T>
-	T getValue(std::string& id) {
-		return 4;
-	}
+template <class T>
+class TypeManager {
+	virtual void saveValue(std::string& id, T value) = 0;
+	virtual T getValue(std::string& id) = 0;
+
+	virtual ~TypeManager() = 0;
+};
+class SettingsStorageInterface : public TypeManager<int>, public TypeManager<bool>
+{	
+	~SettingsStorageInterface() override = 0;
 };
 
