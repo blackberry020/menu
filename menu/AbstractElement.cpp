@@ -5,7 +5,7 @@ AbstractElement::AbstractElement(std::string name) : elementName(name), curIndex
 
 }
 
-AbstractElement::AbstractElement(std::string name, SettingsStorageInterface* storageInterface) : AbstractElement(name)
+AbstractElement::AbstractElement(std::string name, SettingsStorageInterface* storageInterface) : elementName(name), curIndexOfSubElement(0)
 {
 	injectStorage(storageInterface);
 }
