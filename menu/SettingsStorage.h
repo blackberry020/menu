@@ -4,6 +4,7 @@
 
 template <class T>
 class TypeManager {
+public:
 	virtual void saveValue(std::string& id, T value) = 0;
 	virtual T getValue(std::string& id) = 0;
 

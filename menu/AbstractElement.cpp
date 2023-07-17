@@ -1,5 +1,9 @@
 #include "AbstractElement.h"
 
+AbstractElement::AbstractElement(std::string name) : elementName(name)
+{
+}
+
 std::string AbstractElement::getElementName() {
 	return elementName;
 }

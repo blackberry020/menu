@@ -1,8 +1,8 @@
 #pragma once
-#include "IndicatorElement.h"
+#include "ParameterElement.h"
 class IntParameterElement :
-    public IndicatorElement<int>
+    public ParameterElement<int>
 {
-    int currentDigit = 1;
+
 };
 

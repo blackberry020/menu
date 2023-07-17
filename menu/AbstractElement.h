@@ -14,16 +14,21 @@ private:
 
 public :
 
-	virtual std::string getContent() = 0;
+	// constuctor/destructor
+	AbstractElement(std::string name);
+	virtual ~AbstractElement() = 0;
 
 	// attrs
 	virtual bool isEditable() = 0;
 	virtual bool isOpenable() = 0;
 
 
+	// getter
+	std::string getElementName();
+
 	//functions
 
-	std::string getElementName();
+	virtual std::string getContent() = 0;
 
 	virtual void incCurValueDigit();
 	virtual void decCurValueDigit();
@@ -42,8 +47,6 @@ public :
 	bool requestOpenSubElement();
 
 	void incAmountOfChildrenPages();
-
-	virtual ~AbstractElement() = 0;
 
 };
 
