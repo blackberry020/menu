@@ -4,8 +4,10 @@ template<class T>
 class ParameterElement :
     public IndicatorElement<T>
 {
+private:
+    int curDigit;
 public:
-    int curDigit = 1;
+
     bool isEditable() override;
     bool isOpenable() override;
 };

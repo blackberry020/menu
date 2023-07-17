@@ -4,6 +4,7 @@ class FolderElement :
     public AbstractElement
 {   
 public:
+
     std::string getContent() override;
 
     // attrs

@@ -15,7 +15,7 @@ private:
 public :
 
 	// constuctor/destructor
-	AbstractElement(std::string name);
+	explicit AbstractElement(std::string name);
 	virtual ~AbstractElement() = 0;
 
 	// attrs

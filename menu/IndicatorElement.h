@@ -12,8 +12,7 @@ private:
 	// ? Tree Injection ?
 	SettingsStorageInterface* storage;
 public :
-	
-	explicit IndicatorElement(std::string name);
+
 	std::string getContent() override;
 
 	// attrs
