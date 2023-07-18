@@ -28,7 +28,7 @@ public :
 
 	void injectStorage(SettingsStorageInterface* s) override {
 		AbstractElement::injectStorage(s);
-		value = storage->getValue(getElementName(), value);
+		value = getStorage()->getValue(getElementName(), value);
 	}
 
 	

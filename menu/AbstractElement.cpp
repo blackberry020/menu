@@ -34,6 +34,22 @@ std::string AbstractElement::getElementName() {
 	return elementName;
 }
 
+std::vector <AbstractElement*> AbstractElement::getSubElements() {
+	return subElements;
+};
+
+SettingsStorageInterface* AbstractElement::getStorage() {
+	return storage;
+};
+
+int AbstractElement::getAmountOfSubElements() {
+	return amountOfSubElements;
+};
+
+int AbstractElement::getCurIndexOfSubElement() {
+	return curIndexOfSubElement;
+};
+
 void AbstractElement::incCurValueDigit() {
 	// no reaction by default
 };

@@ -22,7 +22,7 @@ FolderElement::FolderElement(std::string name, SettingsStorageInterface* storage
 
 // Display a current child
 std::string FolderElement::getContent() {
-	return "[" + elementName + "]\n\t-> " + getCurSubElement()->getElementName();
+	return "[" + getElementName() + "]\n\t-> " + getCurSubElement()->getElementName();
 }
 
 

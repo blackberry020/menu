@@ -35,10 +35,12 @@ public :
 	virtual bool isOpenable() = 0;
 
 
-	// getter
+	// getters
 	std::string getElementName();
 	std::vector <AbstractElement*> getSubElements();
 	SettingsStorageInterface* getStorage();
+	int getAmountOfSubElements();
+	int getCurIndexOfSubElement();
 
 	//functions
 
