@@ -25,8 +25,3 @@ std::string FolderElement::getContent() {
 	return "[" + getElementName() + "]\n\t-> " + getCurSubElement()->getElementName();
 }
 
-
-void FolderElement::saveValueChanges()
-{
-	// nothing to save, because cannot edit folder
-}

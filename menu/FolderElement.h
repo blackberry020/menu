@@ -12,6 +12,4 @@ public:
     // attrs
     bool isEditable() override;
     bool isOpenable() override;
-
-    void saveValueChanges() override;
 };

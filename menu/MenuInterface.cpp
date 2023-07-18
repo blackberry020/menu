@@ -50,22 +50,22 @@ void MenuInterface::keyPressed(Key key) {
 				curElement->getCurSubElement()->decCurValueDigit();
 				break;
 
-			// 1[0]0 Maybe (right = decrease digit) ? 10[0] ????
 			case Key::Right:
-				curElement->getCurSubElement()->incDigit();
-				break;
-
-			// same as with Right
-			case Key::Left:
 				curElement->getCurSubElement()->decDigit();
 				break;
 
-			case Key::Escape:
-				curElement->getCurSubElement()->saveValueChanges();
+			case Key::Left:
+				curElement->getCurSubElement()->incDigit();
 				break;
 
-			// ????
+			case Key::Escape:
+				// cancel value editing 
+				isEditMode = false;
+				curElement->getCurSubElement()->cancelValueChanges();
+				break;
+
 			case Key::Enter:
+				isEditMode = false;
 				break;
 
 			default:
@@ -94,9 +94,9 @@ void MenuInterface::keyPressed(Key key) {
 			break;
 		case Key::Enter:
 			isEditMode = curElement->requestEditModeSubElement();
+			curElement->getCurSubElement()->prepareForEditing();
 			break;
 
-		// ???
 		case Key::Escape:
 			//ignore
 			break;

@@ -7,10 +7,10 @@
 class AbstractElement
 {
 
-private: // написать геттеры
-	std::string elementName;
+private:
+	std::string elementName = "no_name";
 	std::vector <AbstractElement*> subElements;
-	SettingsStorageInterface* storage = nullptr; // initialization needed
+	SettingsStorageInterface* storage = nullptr;
 	int amountOfSubElements = 0;
 	int curIndexOfSubElement = 0;
 
@@ -46,12 +46,12 @@ public :
 
 	virtual std::string getContent() = 0;
 
+	virtual void prepareForEditing();
+	virtual void cancelValueChanges();
 	virtual void incCurValueDigit();
 	virtual void decCurValueDigit();
 	virtual void incDigit();
 	virtual void decDigit();
-
-	virtual void saveValueChanges();
 
 	AbstractElement* getCurSubElement();
 

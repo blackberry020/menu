@@ -50,6 +50,14 @@ int AbstractElement::getCurIndexOfSubElement() {
 	return curIndexOfSubElement;
 };
 
+void AbstractElement::cancelValueChanges() {
+	// no reaction by default
+}
+
+void AbstractElement::prepareForEditing() {
+	// no reaction by default
+}
+
 void AbstractElement::incCurValueDigit() {
 	// no reaction by default
 };
@@ -65,11 +73,6 @@ void AbstractElement::incDigit() {
 void AbstractElement::decDigit() {
 	// no reaction by default
 };
-
-void AbstractElement::saveValueChanges() {
-	// no reaction by default
-};
-
 
 AbstractElement* AbstractElement::getCurSubElement() {
 	return subElements[curIndexOfSubElement];
