@@ -83,7 +83,7 @@ void AbstractElement::goPrevElement() {
 }
 
 void AbstractElement::goNextElement() {
-	if (curIndexOfSubElement < amountOfSubElements)
+	if (curIndexOfSubElement + 1 < amountOfSubElements)
 		curIndexOfSubElement++;
 	else curIndexOfSubElement = 0;
 }

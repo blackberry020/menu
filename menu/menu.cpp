@@ -20,9 +20,7 @@ int main() {
     );
     InputDevice* inputDevice = new InputDevice(menu);
 
-    inputDevice << Key::Down;
-    inputDevice << Key::Right;
-    inputDevice << Key::Right;
+    inputDevice << Key::Left;
 
     /// ... add checkers 
 
