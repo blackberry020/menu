@@ -6,18 +6,30 @@ class IndicatorElement : public AbstractElement
 {
 private:
 	T value;
-
-	// How to load value without passing an SettingsStorageInterface argument each time?
-	// ????
-	// ? Tree Injection ?
-	SettingsStorageInterface* storage;
 public :
 
-	std::string getContent() override;
+	IndicatorElement(std::string name, T defaultValue) : AbstractElement(name) {
+		value = defaultValue;
+	}
+
+	// ??? add constructor with children (multi-indicator)
+
+	std::string getContent() override {
+		return getElementName() + "\t" + std::to_string(value);
+	}
 
 	// attrs
-	bool isEditable() override;
-	bool isOpenable() override;
+	bool isEditable() override {
+		return false;
+	}
+	bool isOpenable() override {
+		return false;
+	}
+
+	void injectStorage(SettingsStorageInterface* s) override {
+		AbstractElement::injectStorage(s);
+		value = storage->getValue(getElementName(), value);
+	}
 
 	
 };

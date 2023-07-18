@@ -5,6 +5,8 @@ class FolderElement :
 {   
 public:
 
+    explicit FolderElement(std::string name, std::vector <AbstractElement*> _subElements);
+    explicit FolderElement(std::string name, SettingsStorageInterface* storageInterface, std::vector <AbstractElement*> _subElements);
     std::string getContent() override;
 
     // attrs

@@ -8,8 +8,12 @@ private:
     int curDigit;
 public:
 
-    bool isEditable() override;
-    bool isOpenable() override;
+    bool isEditable() override {
+        return true;
+    }
+    bool isOpenable() override {
+        return false;
+    }
 };
 
 

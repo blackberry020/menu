@@ -6,8 +6,7 @@ class Win32OutputDevice : public OutputDevice {
 };
 class Win32Menu : public MenuInterface
 {	
-	Win32Menu() : MenuInterface(new Win32OutputDevice()) {
-	
-	}
+public:
+	explicit Win32Menu(FolderElement* rootFolder);
 };
 

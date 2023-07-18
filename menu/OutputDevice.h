@@ -4,6 +4,9 @@ class OutputDevice
 {	
 public:
 	virtual void onUpdate(std::string data) = 0;
-	virtual ~OutputDevice() = 0;
+	virtual ~OutputDevice();
+
+	friend OutputDevice* operator<<(OutputDevice* device, const std::string& data);
+	friend OutputDevice& operator<<(OutputDevice& device, const std::string& data);
 };
 

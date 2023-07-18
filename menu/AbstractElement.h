@@ -7,7 +7,7 @@
 class AbstractElement
 {
 
-private:
+protected:
 	std::string elementName;
 	std::vector <AbstractElement*> subElements;
 	SettingsStorageInterface* storage;
@@ -16,12 +16,19 @@ private:
 
 public :
 
-	// constuctor/destructor
+	// constuctors/destructor
+
+	// 1. just element, no children
 	explicit AbstractElement(std::string name);
 
-	// for root folder + child injection
-	explicit AbstractElement(std::string name, SettingsStorageInterface* storageInterface);
-	virtual ~AbstractElement() = 0;
+	// 2. element with children
+	explicit AbstractElement(std::string name, std::vector <AbstractElement*> _subElements);
+
+	// 3. for root folder (children + each child injection)
+	explicit AbstractElement(std::string name, SettingsStorageInterface* storageInterface, std::vector <AbstractElement*> _subElements);
+	
+
+	virtual ~AbstractElement();
 
 	// attrs
 	virtual bool isEditable() = 0;
@@ -47,9 +54,9 @@ public :
 	void goPrevElement();
 	void goNextElement();
 
-	//injection function for this element and all child
+	//injection function for this element and all children
 	//??????? mem optimization ?????????
-	void injectStorage(SettingsStorageInterface* storageInterface);
+	virtual void injectStorage(SettingsStorageInterface* storageInterface);
 
 	// for sub elements !!!
 	bool requestEditMode();

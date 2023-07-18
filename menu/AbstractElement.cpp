@@ -1,13 +1,34 @@
 #include "AbstractElement.h"
 
-AbstractElement::AbstractElement(std::string name) : elementName(name), curIndexOfSubElement(0)
+AbstractElement::AbstractElement(std::string name, std::vector <AbstractElement*> _subElements) : 
+	elementName(name),
+	curIndexOfSubElement(0),
+	subElements(_subElements)
 {
-
+	amountOfSubElements = subElements.size();
 }
 
-AbstractElement::AbstractElement(std::string name, SettingsStorageInterface* storageInterface) : elementName(name), curIndexOfSubElement(0)
+AbstractElement::AbstractElement(std::string name, SettingsStorageInterface* storageInterface, std::vector <AbstractElement*> _subElements) :
+	elementName(name),
+	curIndexOfSubElement(0),
+	subElements(_subElements)
 {
 	injectStorage(storageInterface);
+	amountOfSubElements = subElements.size();
+}
+
+AbstractElement::~AbstractElement()
+{
+	amountOfSubElements = subElements.size();
+}
+
+AbstractElement::AbstractElement(std::string name) :
+	elementName(name),
+	curIndexOfSubElement(0),
+	// empty subElements (no children)
+	subElements(std::vector<AbstractElement*>())
+{
+
 }
 
 std::string AbstractElement::getElementName() {
@@ -40,11 +61,16 @@ AbstractElement* AbstractElement::getCurSubElement() {
 }
 
 void AbstractElement::goPrevElement() {
-	if (curIndexOfSubElement) curIndexOfSubElement--;
+	if (curIndexOfSubElement)
+		curIndexOfSubElement--;
+	else
+		curIndexOfSubElement = amountOfSubElements - 1;
 }
 
 void AbstractElement::goNextElement() {
-	if (curIndexOfSubElement != amountOfSubElements - 1) curIndexOfSubElement--;
+	if (curIndexOfSubElement < amountOfSubElements)
+		curIndexOfSubElement++;
+	else curIndexOfSubElement = 0;
 }
 
 void AbstractElement::injectStorage(SettingsStorageInterface* storageInterface)

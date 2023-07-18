@@ -130,6 +130,7 @@
     <ClCompile Include="AbstractElement.cpp" />
     <ClCompile Include="FolderElement.cpp" />
     <ClCompile Include="IndicatorElement.cpp" />
+    <ClCompile Include="InputDevice.cpp" />
     <ClCompile Include="IntParameterElement.cpp" />
     <ClCompile Include="menu.cpp" />
     <ClCompile Include="MenuInterface.cpp" />
@@ -137,18 +138,22 @@
     <ClCompile Include="ParameterElement.cpp" />
     <ClCompile Include="SettingsStorage.cpp" />
     <ClCompile Include="StrConverter.cpp" />
+    <ClCompile Include="TestStorage.cpp" />
     <ClCompile Include="Win32Menu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AbstractElement.h" />
     <ClInclude Include="FolderElement.h" />
+    <ClInclude Include="Key.h" />
     <ClInclude Include="IndicatorElement.h" />
+    <ClInclude Include="InputDevice.h" />
     <ClInclude Include="IntParameterElement.h" />
     <ClInclude Include="MenuInterface.h" />
     <ClInclude Include="OutputDevice.h" />
     <ClInclude Include="ParameterElement.h" />
     <ClInclude Include="SettingsStorage.h" />
     <ClInclude Include="StrConverter.h" />
+    <ClInclude Include="TestStorage.h" />
     <ClInclude Include="Win32Menu.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
