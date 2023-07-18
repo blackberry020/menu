@@ -93,7 +93,7 @@ void MenuInterface::keyPressed(Key key) {
 			curElement->goNextElement();
 			break;
 		case Key::Enter:
-			isEditMode = curElement->requestEditMode();
+			isEditMode = curElement->requestEditModeSubElement();
 			break;
 
 		// ???

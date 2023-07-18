@@ -24,9 +24,8 @@ AbstractElement::~AbstractElement()
 
 AbstractElement::AbstractElement(std::string name) :
 	elementName(name),
-	curIndexOfSubElement(0),
 	// empty subElements (no children)
-	subElements(std::vector<AbstractElement*>())
+	curIndexOfSubElement(0)
 {
 
 }
@@ -82,7 +81,7 @@ void AbstractElement::injectStorage(SettingsStorageInterface* storageInterface)
 }
 
 // for sub elements !!!
-bool AbstractElement::requestEditMode() {
+bool AbstractElement::requestEditModeSubElement() {
 	return getCurSubElement()->isEditable();
 }
 

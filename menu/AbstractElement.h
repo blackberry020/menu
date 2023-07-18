@@ -7,12 +7,12 @@
 class AbstractElement
 {
 
-protected:
+private: // написать геттеры
 	std::string elementName;
 	std::vector <AbstractElement*> subElements;
-	SettingsStorageInterface* storage;
-	int amountOfSubElements;
-	int curIndexOfSubElement;
+	SettingsStorageInterface* storage = nullptr; // initialization needed
+	int amountOfSubElements = 0;
+	int curIndexOfSubElement = 0;
 
 public :
 
@@ -37,6 +37,8 @@ public :
 
 	// getter
 	std::string getElementName();
+	std::vector <AbstractElement*> getSubElements();
+	SettingsStorageInterface* getStorage();
 
 	//functions
 
@@ -59,7 +61,7 @@ public :
 	virtual void injectStorage(SettingsStorageInterface* storageInterface);
 
 	// for sub elements !!!
-	bool requestEditMode();
+	bool requestEditModeSubElement();
 	bool requestOpenSubElement();
 
 	void incAmountOfChildrenPages();
