@@ -22,6 +22,10 @@ FolderElement::FolderElement(std::string name, SettingsStorageInterface* storage
 
 // Display a current child
 std::string FolderElement::getContent() {
-	return "[" + getElementName() + "]\n\t-> " + getCurSubElement()->getElementName();
+	return "[" + getElementName() + "]\n\t-> " + getCurSubElement()->getPreview();
+}
+
+std::string FolderElement::getPreview() {
+	return getElementName();
 }
 

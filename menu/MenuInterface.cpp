@@ -1,4 +1,6 @@
 #include "MenuInterface.h"
+#include <fstream>
+using namespace std;
 
 // collect data from models
 // update output device state;
@@ -38,8 +40,11 @@ MenuInterface::~MenuInterface()
 
 }
 void MenuInterface::keyPressed(Key key) {
+
 	AbstractElement* curElement = openedElementsSequence.top();
+
 	if (isEditMode) {
+
 		switch (key)
 		{
 			case Key::Up:

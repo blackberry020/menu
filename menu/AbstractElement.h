@@ -45,6 +45,7 @@ public :
 	//functions
 
 	virtual std::string getContent() = 0;
+	virtual std::string getPreview() = 0;
 
 	virtual void prepareForEditing();
 	virtual void cancelValueChanges();

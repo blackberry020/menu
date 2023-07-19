@@ -15,13 +15,18 @@ int main() {
                     new IndicatorElement<int>("PI40", 0),
                     new IndicatorElement<int>("PI45", 0),
                     new IndicatorElement<int>("PI412", 0),
+                    new ParameterElement<int>("P1", 123)
                 })
             })
     );
     InputDevice* inputDevice = new InputDevice(menu);
 
+    inputDevice << Key::Down;
     inputDevice << Key::Left;
-
+    inputDevice << Key::Enter;
+    inputDevice << Key::Left;
+    inputDevice << Key::Up;
+    
     /// ... add checkers 
 
     return 0;

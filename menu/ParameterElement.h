@@ -1,14 +1,20 @@
 #pragma once
 #include "IndicatorElement.h"
+#include <fstream>
+using namespace std;
+
 template<class T>
 class ParameterElement :
     public IndicatorElement<T>
 {
 private:
     int curDigit;
-    T value;
     T valueBackup;
 public:
+
+    ParameterElement(std::string name, T newValue) : IndicatorElement<T>(name, newValue) {
+        
+    };
 
     bool isEditable() override {
         return true;
@@ -39,7 +45,7 @@ public:
     };
     
     void decDigit() override {
-        if (curDigit != 1) curDigit /= 10;
+        if (curDigit > 1) curDigit /= 10;
     };
 };
 

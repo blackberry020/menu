@@ -3,6 +3,6 @@
 class IntParameterElement :
     public ParameterElement<int>
 {
-
+public:
 };
 
