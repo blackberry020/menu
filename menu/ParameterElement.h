@@ -48,6 +48,13 @@ public:
     void decDigit() override {
         if (curDigit > 1) curDigit /= 10;
     };
+
+    void saveChanges() override {
+        IndicatorElement<T>::getStorage()->setValue(
+            IndicatorElement<T>::getElementName(),
+            IndicatorElement<T>::value
+        );
+    }
 };
 
 

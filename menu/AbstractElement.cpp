@@ -72,7 +72,12 @@ void AbstractElement::incDigit() {
 
 void AbstractElement::decDigit() {
 	// no reaction by default
-};
+}
+void AbstractElement::saveChanges()
+{
+	// no reaction by default
+}
+;
 
 AbstractElement* AbstractElement::getCurSubElement() {
 	return subElements[curIndexOfSubElement];

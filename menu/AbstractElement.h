@@ -53,6 +53,7 @@ public :
 	virtual void decCurValueDigit();
 	virtual void incDigit();
 	virtual void decDigit();
+	virtual void saveChanges();
 
 	AbstractElement* getCurSubElement();
 

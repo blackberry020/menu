@@ -71,6 +71,7 @@ void MenuInterface::keyPressed(Key key) {
 
 			case Key::Enter:
 				isEditMode = false;
+				curElement->getCurSubElement()->saveChanges();
 				break;
 
 			default:
