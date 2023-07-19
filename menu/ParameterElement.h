@@ -1,6 +1,7 @@
 #pragma once
 #include "IndicatorElement.h"
 #include <fstream>
+
 using namespace std;
 
 template<class T>
@@ -24,20 +25,20 @@ public:
     }
 
     void prepareForEditing() override {
-        setValue(valueBackup);
+        valueBackup = IndicatorElement<T>::value;
         curDigit = 1;
     };
 
     void cancelValueChanges() override {
-        setValue(valueBackup);
+        IndicatorElement<T>::value = valueBackup;
     }
 
     void incCurValueDigit() override {
-        setValue(getValue() + curDigit);
+        IndicatorElement<T>::value += curDigit;
     };
 
     void decCurValueDigit() override {
-        setValue(getValue() - curDigit);
+        IndicatorElement<T>::value -= curDigit;
     };
 
     void incDigit() override {
