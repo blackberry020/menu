@@ -24,20 +24,20 @@ public:
     }
 
     void prepareForEditing() override {
-        valueBackup = value;
+        setValue(valueBackup);
         curDigit = 1;
     };
 
     void cancelValueChanges() override {
-        value = valueBackup;
+        setValue(valueBackup);
     }
 
     void incCurValueDigit() override {
-        value += curDigit;
+        setValue(getValue() + curDigit);
     };
 
     void decCurValueDigit() override {
-        value -= curDigit;
+        setValue(getValue() - curDigit);
     };
 
     void incDigit() override {

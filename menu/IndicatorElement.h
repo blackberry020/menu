@@ -14,14 +14,17 @@ public :
 
 	IndicatorElement(std::string name, T defaultValue) : AbstractElement(name) {
 		value = defaultValue;
-
-		fstream deb;
-		deb.open("localDebug.txt");
-		deb << "value " << value;
-		deb.close();
 	}
 
 	// ??? add constructor with children (multi-indicator)
+
+	T getValue() {
+		return value;
+	}
+
+	void setValue(T newValue) {
+		value = newValue;
+	}
 
 	std::string getContent() override {
 		return getElementName() + "\t" + std::to_string(value);
