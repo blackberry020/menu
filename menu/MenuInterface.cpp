@@ -100,7 +100,8 @@ void MenuInterface::keyPressed(Key key) {
 			break;
 		case Key::Enter:
 			isEditMode = curElement->requestEditModeSubElement();
-			curElement->getCurSubElement()->prepareForEditing();
+			if (isEditMode)
+				curElement->getCurSubElement()->prepareForEditing();
 			break;
 
 		case Key::Escape:

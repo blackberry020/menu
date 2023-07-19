@@ -9,7 +9,6 @@ int TestStorage::getValue(std::string id, int defaultValue)
         return 12;
     if (id == "PI412")
         return -4;
-
     return defaultValue;
 }
 

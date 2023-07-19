@@ -2,7 +2,8 @@
 #include <string>
 class StrConverter
 {	
-	std::string toString(int value);
-	std::string toString(std::string value);
+public:
+	static std::string toString(int value);
+	static std::string toString(std::string value);
 };
 

@@ -1,7 +1,7 @@
 #pragma once
 #include "AbstractElement.h"
 #include "SettingsStorage.h"
-
+#include "StrConverter.h"
 #include <fstream>
 using namespace std;
 
@@ -27,7 +27,7 @@ public :
 	}
 
 	std::string getContent(bool isEditMode) override {
-		return getElementName() + "\t" + std::to_string(value);
+		return "[I] " + getElementName() + "\t" + StrConverter::toString(value);
 	}
 
 	std::string getPreview(bool isEditMode) override {
