@@ -8,7 +8,7 @@ void MenuInterface::update() {
 	outputDevice <<
 		getInstructions() + 
 		"\n" +
-		"\n" + openedElementsSequence.top()->getContent();
+		"\n" + openedElementsSequence.top()->getContent(isEditMode);
 }
 
 // By default, edit mode is false (when device started)

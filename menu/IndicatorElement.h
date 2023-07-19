@@ -26,12 +26,12 @@ public :
 		value = newValue;
 	}
 
-	std::string getContent() override {
+	std::string getContent(bool isEditMode) override {
 		return getElementName() + "\t" + std::to_string(value);
 	}
 
-	std::string getPreview() override {
-		return getContent();
+	std::string getPreview(bool isEditMode) override {
+		return getContent(isEditMode);
 	}
 
 	// attrs
