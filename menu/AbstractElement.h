@@ -57,7 +57,6 @@ public :
 	virtual void decDigit();
 
 	virtual void addNewDigitLeft();
-	virtual void addNewDigitRight();
 
 	AbstractElement* getCurSubElement();
 

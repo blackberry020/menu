@@ -58,10 +58,6 @@ int main() {
                         inputDevice << Key::LongLeft;
                         continue;
                         //break;
-                    case VK_RIGHT:
-                        inputDevice << Key::LongRight;
-                        continue;
-                        //break;
                     }
 
                 }

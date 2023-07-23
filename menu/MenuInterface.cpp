@@ -53,10 +53,6 @@ void MenuInterface::keyPressed(Key key) {
 				curElement->getCurSubElement()->addNewDigitLeft();
 				break;
 
-			case Key::LongRight:
-				curElement->getCurSubElement()->addNewDigitRight();
-				break;
-
 			case Key::Up:
 				curElement->getCurSubElement()->incCurValueDigit();
 				break;

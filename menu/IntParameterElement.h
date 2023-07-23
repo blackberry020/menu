@@ -68,14 +68,6 @@ public:
         }
     }
 
-    void addNewDigitRight() override {
-        if (getDigitLength() < maxValueLength) {
-            ParameterElement<int>::value *= 10;
-            ParameterElement<int>::value++;
-            incDigit();
-        }
-    }
-
     std::string getEditViewValue() override {
         
         std::string res = std::to_string(ParameterElement<int>::value);

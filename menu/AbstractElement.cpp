@@ -78,10 +78,6 @@ void AbstractElement::addNewDigitLeft() {
 	// no reaction by default
 }
 
-void AbstractElement::addNewDigitRight() {
-	// no reaction by default
-}
-
 void AbstractElement::saveChanges()
 {
 	// no reaction by default
