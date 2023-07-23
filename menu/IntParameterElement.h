@@ -53,7 +53,7 @@ public:
     };
 
     void incDigit() override {
-        if (getDigitLength() <  maxValueLength)
+        if (getDigitLength() < maxValueLength && getValueLength() != getDigitLength())
             curDigit *= 10;
     };
 
@@ -63,7 +63,7 @@ public:
 
     void addNewDigitLeft() override {
         if (getDigitLength() < maxValueLength) {
-            incDigit();
+            curDigit *= 10;
             incCurValueDigit();
         }
     }
