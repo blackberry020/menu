@@ -50,8 +50,8 @@ public:
     };
 
     void decCurValueDigit() override {
-        if (getLength(ParameterElement<int>::value - curDigit) <= maxValueLength)
-            ParameterElement<int>::value -= curDigit;
+        ParameterElement<int>::value -= curDigit;
+        if (getValueLength() < getDigitLength()) curDigit /= 10;
     };
 
     void incDigit() override {
@@ -74,7 +74,7 @@ public:
     std::string getEditViewValue() override {
         
         std::string res = std::to_string(ParameterElement<int>::value);
-        int curDigitIndex =  getValueLength() - std::to_string(curDigit).length();
+        int curDigitIndex = getValueLength() - std::to_string(curDigit).length();
         
         // select a digit in number
         res.insert(curDigitIndex, "[");
