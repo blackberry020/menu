@@ -49,11 +49,15 @@ public :
 
 	virtual void prepareForEditing();
 	virtual void cancelValueChanges();
+	virtual void saveChanges();
+
 	virtual void incCurValueDigit();
 	virtual void decCurValueDigit();
 	virtual void incDigit();
 	virtual void decDigit();
-	virtual void saveChanges();
+
+	virtual void addNewDigitLeft();
+	virtual void addNewDigitRight();
 
 	AbstractElement* getCurSubElement();
 

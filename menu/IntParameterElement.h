@@ -61,12 +61,26 @@ public:
         if (curDigit > 1) curDigit /= 10;
     };
 
-    std::string getEditViewValue() override {
-        // insert '_' before a value
-        std::string res = std::string(maxValueLength - getValueLength(), '_') + std::to_string(ParameterElement<int>::value);
-        int curDigitIndex = 
-            maxValueLength - std::to_string(curDigit).length();
+    void addNewDigitLeft() override {
+        if (getDigitLength() < maxValueLength) {
+            incDigit();
+            incCurValueDigit();
+        }
+    }
 
+    void addNewDigitRight() override {
+        if (getDigitLength() < maxValueLength) {
+            ParameterElement<int>::value *= 10;
+            ParameterElement<int>::value++;
+            incDigit();
+        }
+    }
+
+    std::string getEditViewValue() override {
+        
+        std::string res = std::to_string(ParameterElement<int>::value);
+        int curDigitIndex =  getValueLength() - std::to_string(curDigit).length();
+        
         // select a digit in number
         res.insert(curDigitIndex, "[");
         res.insert(curDigitIndex + 2, "]");

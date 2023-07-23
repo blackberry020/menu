@@ -18,7 +18,6 @@ private:
 	bool isEditMode;
 protected:
 
-	// Method, which provide output to outputDevice ;
 	virtual void update();
 
 	virtual const std::string getInstructions();
@@ -30,9 +29,6 @@ public:
 
 	OutputDevice* getOutputDevice();
 
-	// Method, which calls when key is Pressed.
-	// With default binding
 	virtual void keyPressed(Key);
-	
 };
 

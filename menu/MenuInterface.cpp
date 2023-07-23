@@ -39,6 +39,7 @@ MenuInterface::~MenuInterface()
 {
 
 }
+
 void MenuInterface::keyPressed(Key key) {
 
 	AbstractElement* curElement = openedElementsSequence.top();
@@ -47,6 +48,15 @@ void MenuInterface::keyPressed(Key key) {
 
 		switch (key)
 		{
+
+			case Key::LongLeft:
+				curElement->getCurSubElement()->addNewDigitLeft();
+				break;
+
+			case Key::LongRight:
+				curElement->getCurSubElement()->addNewDigitRight();
+				break;
+
 			case Key::Up:
 				curElement->getCurSubElement()->incCurValueDigit();
 				break;

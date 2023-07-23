@@ -8,14 +8,11 @@
 #include "Key.h"
 #include <Windows.h>
 #include <vector>
+#include <fstream>
+
+using namespace std;
 
 int main() {
-
-    HANDLE hIn = GetStdHandle(STD_INPUT_HANDLE);
-    INPUT_RECORD inp;
-    DWORD num_of_events;
-    bool exit = false;
-
 
     Win32Menu* menu = new Win32Menu(
         new FolderElement("root", new TestStorage(), {
@@ -23,9 +20,6 @@ int main() {
                     new IndicatorElement<int>("PI40", 0),
                     new IndicatorElement<int>("PI45", 0),
                     new IndicatorElement<int>("PI412", 0),
-
-                    // 123 - is a default value (if not found on storage)
-                    // if value exists in storage, we use storage value !!!
                     new IntParameterElement("P1", 123)
                 })
             })
@@ -33,48 +27,81 @@ int main() {
 
     InputDevice* inputDevice = new InputDevice(menu);
 
+    HANDLE hIn = GetStdHandle(STD_INPUT_HANDLE);
+    INPUT_RECORD inp;
+    DWORD num_of_events;
+    bool exit = false;
+
+    fstream db;
+    db.open("localDebug.txt", ios::out);
+
+
     while (!exit)
     {
         ReadConsoleInput(hIn, &inp, 1, &num_of_events);
 
-        if (inp.Event.KeyEvent.bKeyDown)
+        if (inp.Event.KeyEvent.bKeyDown) {
+
             switch (inp.EventType)
             {
-                case KEY_EVENT:
+            case KEY_EVENT:
+
+                db << inp.Event.KeyEvent.wRepeatCount;
+
+                if (inp.Event.KeyEvent.wRepeatCount >= 3) {            // if it's pressed long enough
+
+                    db << "repeat count";
+
                     switch (inp.Event.KeyEvent.wVirtualKeyCode)
                     {
-                        case VK_LEFT:
-                            inputDevice << Key::Left;
-                            break;
-                        case VK_RIGHT:
-                            inputDevice << Key::Right;
-                            break;
-                        case VK_UP:
-                            inputDevice << Key::Up;
-                            break;
-                        case VK_DOWN:
-                            inputDevice << Key::Down;
-                            break;
-                        case VK_RETURN:
-                            inputDevice << Key::Enter;
-                            break;
-                        case VK_ESCAPE:
-                            inputDevice << Key::Escape;
-                            break;
-
-                        // EXIT ON BACKSPACE 
-                        case VK_BACK:
-                            exit = true;
-                            break;
+                    case VK_LEFT:
+                        inputDevice << Key::LongLeft;
+                        continue;
+                        //break;
+                    case VK_RIGHT:
+                        inputDevice << Key::LongRight;
+                        continue;
+                        //break;
                     }
+
+                }
+
+                switch (inp.Event.KeyEvent.wVirtualKeyCode)
+                {
+                case VK_LEFT:
+                    inputDevice << Key::Left;
                     break;
-             }
-        Sleep(10);
+                case VK_RIGHT:
+                    inputDevice << Key::Right;
+                    break;
+                case VK_UP:
+                    inputDevice << Key::Up;
+                    break;
+                case VK_DOWN:
+                    inputDevice << Key::Down;
+                    break;
+                case VK_RETURN:
+                    inputDevice << Key::Enter;
+                    break;
+                case VK_ESCAPE:
+                    inputDevice << Key::Escape;
+                    break; 
+                case VK_BACK:
+                    exit = true;
+                    break;
+                default:
+                    break;
+                }
+                break;
+
+            default:
+                break;
+            }
+        }
+
     }
 
-
-    
-    /// ... add checkers */
+    db.close();
 
     return 0;
 }
