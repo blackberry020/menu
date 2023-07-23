@@ -48,18 +48,15 @@ int main() {
 
                 db << inp.Event.KeyEvent.wRepeatCount;
 
-                if (inp.Event.KeyEvent.wRepeatCount >= 3) {            // if it's pressed long enough
+                if (inp.Event.KeyEvent.wRepeatCount >= 3) {
 
                     db << "repeat count";
 
-                    switch (inp.Event.KeyEvent.wVirtualKeyCode)
+                    if (inp.Event.KeyEvent.wVirtualKeyCode == VK_LEFT)
                     {
-                    case VK_LEFT:
                         inputDevice << Key::LongLeft;
                         continue;
-                        //break;
                     }
-
                 }
 
                 switch (inp.Event.KeyEvent.wVirtualKeyCode)

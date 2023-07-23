@@ -1,5 +1,7 @@
 #pragma once
 #include "ParameterElement.h"
+#include "math.h"
+
 class IntParameterElement :
     public ParameterElement<int>
 {
@@ -53,12 +55,13 @@ public:
     };
 
     void incDigit() override {
-        if (getDigitLength() < maxValueLength && getValueLength() != getDigitLength())
-            curDigit *= 10;
+        if (getDigitLength() < getValueLength()) curDigit *= 10;
+        else curDigit = 1;
     };
 
     void decDigit() override {
         if (curDigit > 1) curDigit /= 10;
+        else curDigit = pow(10, getValueLength() - 1); // unsafe, write your own function
     };
 
     void addNewDigitLeft() override {
