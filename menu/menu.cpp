@@ -80,11 +80,8 @@ int main() {
                 cntLeftPressed = 0;
             }
         }
-
     }
 
-
-    
     delete inputDevice;
     delete menu;
 
