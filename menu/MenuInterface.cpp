@@ -43,7 +43,6 @@ const std::string MenuInterface::getInstructions() {
 MenuInterface::~MenuInterface()
 {	
 
-	std::cout << "DESTRUCT MENU";
 	if (outputDevice != nullptr) delete outputDevice;
 
 	if (storage != nullptr)
