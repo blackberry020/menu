@@ -20,8 +20,6 @@ private:
 	bool isEditMode;
 protected:
 
-	virtual void update();
-
 	virtual const std::string getInstructions();
 
 public:
@@ -29,6 +27,8 @@ public:
 	virtual ~MenuInterface();
 
 	explicit MenuInterface(OutputDevice* oDevice, SettingsStorageInterface* _storage, FolderElement* rootFolder);
+
+	virtual void update();
 
 	OutputDevice* getOutputDevice();
 

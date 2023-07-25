@@ -27,6 +27,7 @@ public :
 	}
 
 	std::string getContent(bool isEditMode) override {
+		value = getStorage()->getValue(getElementName(), value);
 		return "[I] " + getElementName() + "\t" + StrConverter::toString(value);
 	}
 
