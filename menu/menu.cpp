@@ -9,13 +9,14 @@
 #include <Windows.h>
 #include <vector>
 #include <fstream>
+#include <ctime>
 
 using namespace std;
 
 int main() {
-
     Win32Menu* menu = new Win32Menu(
         new FolderElement("root", {
+            new IndicatorElement<int>("PI_TIMER", 4),
             new FolderElement("C", {
                     new IndicatorElement<int>("PI40", 0),
                     new IndicatorElement<int>("PI45", 0),
@@ -23,7 +24,7 @@ int main() {
                     new IntParameterElement("P1", 123)
                 })
             }),
-        new TestStorage()
+        new TestStorage(std::time(0))
     );
 
     InputDevice* inputDevice = new InputDevice(menu);
@@ -80,6 +81,8 @@ int main() {
                 cntLeftPressed = 0;
             }
         }
+        menu->update();
+        //Sleep(100);
     }
 
     delete inputDevice;

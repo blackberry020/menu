@@ -1,5 +1,8 @@
 #include "TestStorage.h"
 
+TestStorage::TestStorage(int _startTime) : startTime(_startTime){
+    
+}
 
 int TestStorage::getValue(std::string id, int defaultValue)
 {
@@ -9,6 +12,8 @@ int TestStorage::getValue(std::string id, int defaultValue)
         return 12;
     if (id == "PI412")
         return -4;
+    if (id == "PI_TIMER")
+        return std::time(0) - startTime;
     return defaultValue;
 }
 
