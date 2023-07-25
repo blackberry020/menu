@@ -37,7 +37,12 @@ const std::string MenuInterface::getInstructions() {
 }
 MenuInterface::~MenuInterface()
 {
+	if (outputDevice != nullptr) delete outputDevice;
 
+	while (!openedElementsSequence.empty()) {
+		if (openedElementsSequence.top() != nullptr) delete openedElementsSequence.top();
+		openedElementsSequence.pop();
+	}
 }
 
 void MenuInterface::keyPressed(Key key) {

@@ -82,5 +82,7 @@ int main() {
 
     }
 
+    delete inputDevice;
+
     return 0;
 }

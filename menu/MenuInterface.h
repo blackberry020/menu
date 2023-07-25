@@ -22,15 +22,14 @@ protected:
 
 	virtual const std::string getInstructions();
 
+public:
+
 	virtual ~MenuInterface();
 
-public:
 	explicit MenuInterface(OutputDevice* oDevice, FolderElement* rootFolder);
 
 	OutputDevice* getOutputDevice();
 
 	virtual void keyPressed(Key);
-
-	~MenuInterface();
 };
 
