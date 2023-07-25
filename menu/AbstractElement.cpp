@@ -20,9 +20,9 @@ AbstractElement::AbstractElement(std::string name, SettingsStorageInterface* sto
 AbstractElement::~AbstractElement()
 {
 	//if (storage != nullptr) delete storage;
-	for (int i = 0; i < subElements.size(); i++) {
-		if (subElements[i] != nullptr) delete subElements[i];
-	}
+	//for (int i = 0; i < subElements.size(); i++) {
+	//	if (subElements[i] != nullptr) delete subElements[i];
+	//}
 }
 
 AbstractElement::AbstractElement(std::string name) :
