@@ -43,7 +43,8 @@ const std::string MenuInterface::getInstructions() {
 MenuInterface::~MenuInterface()
 {	
 
-	if (outputDevice != nullptr) delete outputDevice;
+	if (outputDevice != nullptr) 
+		delete outputDevice;
 
 	if (storage != nullptr)
 		delete storage;
