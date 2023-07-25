@@ -16,6 +16,6 @@ public:
 	virtual void setValue(std::string id, std::string value) = 0;
 
 
-	virtual ~SettingsStorageInterface();
+	virtual ~SettingsStorageInterface() = default;
 };
 
