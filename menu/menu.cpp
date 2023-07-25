@@ -37,8 +37,10 @@ int main() {
     int cntLeftPressed = 0;
 
     while (!exit)
-    {
-        ReadConsoleInput(hIn, &inp, 1, &num_of_events);
+    {   
+        GetNumberOfConsoleInputEvents(hIn, &num_of_events);
+        if (num_of_events > 0)
+            ReadConsoleInput(hIn, &inp, 1, &num_of_events);
 
         if (inp.Event.KeyEvent.bKeyDown) {
 
@@ -82,7 +84,7 @@ int main() {
             }
         }
         menu->update();
-        //Sleep(100);
+        Sleep(100);
     }
 
     delete inputDevice;
