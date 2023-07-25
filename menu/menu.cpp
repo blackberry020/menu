@@ -26,6 +26,7 @@ int main() {
         new TestStorage()
     );
 
+
     InputDevice* inputDevice = new InputDevice(menu);
 
     HANDLE hIn = GetStdHandle(STD_INPUT_HANDLE);
