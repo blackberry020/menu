@@ -12,8 +12,13 @@ void MenuInterface::update() {
 }
 
 // By default, edit mode is false (when device started)
-MenuInterface::MenuInterface(OutputDevice * oDevice, FolderElement* rootFolder) : outputDevice(oDevice), isEditMode(false) {
+MenuInterface::MenuInterface(OutputDevice * oDevice, SettingsStorageInterface* _storage, FolderElement* rootFolder) : 
+	outputDevice(oDevice),
+	storage(_storage),
+	isEditMode(false) {
+
 	// root folder is always opened
+	rootFolder->injectStorage(storage);
 	openedElementsSequence.push(rootFolder);
 	update();
 }
@@ -36,9 +41,13 @@ const std::string MenuInterface::getInstructions() {
 		"\n\t -> ELEMENT\t- current selected element in folder";
 }
 MenuInterface::~MenuInterface()
-{
+{	
+
+	std::cout << "DESTRUCT MENU";
 	if (outputDevice != nullptr) delete outputDevice;
 
+	if (storage != nullptr)
+		delete storage;
 	while (!openedElementsSequence.empty()) {
 		if (openedElementsSequence.top() != nullptr) delete openedElementsSequence.top();
 		openedElementsSequence.pop();

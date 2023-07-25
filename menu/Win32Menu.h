@@ -8,6 +8,6 @@ class Win32OutputDevice : public OutputDevice {
 class Win32Menu : public MenuInterface
 {	
 public:
-	explicit Win32Menu(FolderElement* rootFolder);
+	explicit Win32Menu(FolderElement* rootFolder, SettingsStorageInterface* storage);
 };
 

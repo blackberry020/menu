@@ -4,6 +4,6 @@ void Win32OutputDevice::onUpdate(std::string data) {
 	std::cout << data;
 }
 
-Win32Menu::Win32Menu(FolderElement* rootFolder) : MenuInterface(new Win32OutputDevice(), rootFolder) {
+Win32Menu::Win32Menu(FolderElement* rootFolder, SettingsStorageInterface* storage) : MenuInterface(new Win32OutputDevice(), storage, rootFolder) {
 
 }

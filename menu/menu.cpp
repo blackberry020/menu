@@ -15,14 +15,15 @@ using namespace std;
 int main() {
 
     Win32Menu* menu = new Win32Menu(
-        new FolderElement("root", new TestStorage(), {
+        new FolderElement("root", {
             new FolderElement("C", {
                     new IndicatorElement<int>("PI40", 0),
                     new IndicatorElement<int>("PI45", 0),
                     new IndicatorElement<int>("PI412", 0),
                     new IntParameterElement("P1", 123)
                 })
-            })
+            }),
+        new TestStorage()
     );
 
     InputDevice* inputDevice = new InputDevice(menu);
@@ -82,7 +83,10 @@ int main() {
 
     }
 
+
+    
     delete inputDevice;
+    delete menu;
 
     return 0;
 }

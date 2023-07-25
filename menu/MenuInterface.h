@@ -15,6 +15,8 @@ private:
 
 	OutputDevice* outputDevice;
 
+	SettingsStorageInterface* storage;
+
 	bool isEditMode;
 protected:
 
@@ -26,7 +28,7 @@ public:
 
 	virtual ~MenuInterface();
 
-	explicit MenuInterface(OutputDevice* oDevice, FolderElement* rootFolder);
+	explicit MenuInterface(OutputDevice* oDevice, SettingsStorageInterface* _storage, FolderElement* rootFolder);
 
 	OutputDevice* getOutputDevice();
 
