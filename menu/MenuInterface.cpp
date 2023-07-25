@@ -48,10 +48,13 @@ MenuInterface::~MenuInterface()
 
 	if (storage != nullptr)
 		delete storage;
-	while (!openedElementsSequence.empty()) {
-		if (openedElementsSequence.top() != nullptr) delete openedElementsSequence.top();
+	
+	while (openedElementsSequence.size() != 1) {
 		openedElementsSequence.pop();
 	}
+
+	delete openedElementsSequence.top();
+	openedElementsSequence.pop();
 }
 
 void MenuInterface::keyPressed(Key key) {
