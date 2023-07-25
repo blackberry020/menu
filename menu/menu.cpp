@@ -39,48 +39,49 @@ int main() {
     while (!exit)
     {   
         GetNumberOfConsoleInputEvents(hIn, &num_of_events);
-        if (num_of_events > 0)
+        if (num_of_events > 0) {
             ReadConsoleInput(hIn, &inp, 1, &num_of_events);
 
-        if (inp.Event.KeyEvent.bKeyDown) {
+            if (inp.Event.KeyEvent.bKeyDown) {
 
-            if (inp.EventType == KEY_EVENT)
-            {
-                switch (inp.Event.KeyEvent.wVirtualKeyCode)
+                if (inp.EventType == KEY_EVENT)
                 {
-                case VK_LEFT:
-                    cntLeftPressed++;
-                    break;
-                case VK_RIGHT:
-                    inputDevice << Key::Right;
-                    break;
-                case VK_UP:
-                    inputDevice << Key::Up;
-                    break;
-                case VK_DOWN:
-                    inputDevice << Key::Down;
-                    break;
-                case VK_RETURN:
-                    inputDevice << Key::Enter;
-                    break;
-                case VK_ESCAPE:
-                    inputDevice << Key::Escape;
-                    break; 
-                case VK_BACK:
-                    exit = true;
-                    break;
-                default:
-                    break;
+                    switch (inp.Event.KeyEvent.wVirtualKeyCode)
+                    {
+                    case VK_LEFT:
+                        cntLeftPressed++;
+                        break;
+                    case VK_RIGHT:
+                        inputDevice << Key::Right;
+                        break;
+                    case VK_UP:
+                        inputDevice << Key::Up;
+                        break;
+                    case VK_DOWN:
+                        inputDevice << Key::Down;
+                        break;
+                    case VK_RETURN:
+                        inputDevice << Key::Enter;
+                        break;
+                    case VK_ESCAPE:
+                        inputDevice << Key::Escape;
+                        break;
+                    case VK_BACK:
+                        exit = true;
+                        break;
+                    default:
+                        break;
+                    }
                 }
             }
-        }
-        else {
-            if (inp.EventType == KEY_EVENT && inp.Event.KeyEvent.wVirtualKeyCode == VK_LEFT)
-            {
-                if (cntLeftPressed == 1) inputDevice << Key::Left;
-                else inputDevice << Key::LongLeft;
+            else {
+                if (inp.EventType == KEY_EVENT && inp.Event.KeyEvent.wVirtualKeyCode == VK_LEFT)
+                {
+                    if (cntLeftPressed == 1) inputDevice << Key::Left;
+                    else inputDevice << Key::LongLeft;
 
-                cntLeftPressed = 0;
+                    cntLeftPressed = 0;
+                }
             }
         }
         menu->update();
