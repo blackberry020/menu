@@ -5,12 +5,14 @@
 class InputDevice
 {
 private:
-	MenuInterface * menuInterface;
+	MenuInterface* menuInterface;
 public:
 	explicit InputDevice(MenuInterface* menu);
 
 	friend InputDevice* operator<<(InputDevice* device, const Key& key);
 	friend InputDevice& operator<<(InputDevice& device, const Key& key);
+
+	~InputDevice();
 
 	MenuInterface* getMenu();
 };

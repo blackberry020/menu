@@ -17,6 +17,11 @@ InputDevice::InputDevice(MenuInterface* menu) : menuInterface(menu)
 
 }
 
+InputDevice::~InputDevice()
+{
+	if (menuInterface != nullptr) delete menuInterface;
+}
+
 MenuInterface* InputDevice::getMenu()
 {
 	return menuInterface;

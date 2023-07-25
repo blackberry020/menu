@@ -32,9 +32,7 @@ int main() {
     DWORD num_of_events;
     bool exit = false;
 
-    fstream db;
-    db.open("localDebug.txt", ios::out);
-
+    int cntLeftPressed = 0;
 
     while (!exit)
     {
@@ -42,27 +40,12 @@ int main() {
 
         if (inp.Event.KeyEvent.bKeyDown) {
 
-            switch (inp.EventType)
+            if (inp.EventType == KEY_EVENT)
             {
-            case KEY_EVENT:
-
-                db << inp.Event.KeyEvent.wRepeatCount;
-
-                if (inp.Event.KeyEvent.wRepeatCount >= 3) {
-
-                    db << "repeat count";
-
-                    if (inp.Event.KeyEvent.wVirtualKeyCode == VK_LEFT)
-                    {
-                        inputDevice << Key::LongLeft;
-                        continue;
-                    }
-                }
-
                 switch (inp.Event.KeyEvent.wVirtualKeyCode)
                 {
                 case VK_LEFT:
-                    inputDevice << Key::Left;
+                    cntLeftPressed++;
                     break;
                 case VK_RIGHT:
                     inputDevice << Key::Right;
@@ -85,16 +68,19 @@ int main() {
                 default:
                     break;
                 }
-                break;
+            }
+        }
+        else {
+            if (inp.EventType == KEY_EVENT && inp.Event.KeyEvent.wVirtualKeyCode == VK_LEFT)
+            {
+                if (cntLeftPressed == 1) inputDevice << Key::Left;
+                else inputDevice << Key::LongLeft;
 
-            default:
-                break;
+                cntLeftPressed = 0;
             }
         }
 
     }
-
-    db.close();
 
     return 0;
 }

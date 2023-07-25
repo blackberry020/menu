@@ -30,5 +30,7 @@ public:
 	OutputDevice* getOutputDevice();
 
 	virtual void keyPressed(Key);
+
+	~MenuInterface();
 };
 
