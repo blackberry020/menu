@@ -9,16 +9,19 @@ class ParameterElement :
     public IndicatorElement<T>
 {
 protected:
-    // !!! Digits are actual only for ints! (Maybe move this field to IntParameterElement???)
-
     T valueBackup;
+    // for numeric parameters, maybe for text it won't be string but enum
+    T minEditValue;
+    T maxEditValue;
 public:
 
-    ParameterElement(std::string name, T defaultValue) : IndicatorElement<T>(name, defaultValue) {
-        
+    ParameterElement(std::string name, T defaultValue, T minVal, T maxVal) : IndicatorElement<T>(name, defaultValue) {
+        minEditValue = minVal;
+        maxEditValue = maxVal;
     };
     
     virtual std::string getEditViewValue() = 0;
+    virtual bool isValidForChange(T) = 0;
 
     std::string getContent(bool isEditMode) override {
         if (isEditMode)

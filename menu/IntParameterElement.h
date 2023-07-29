@@ -6,8 +6,7 @@ class IntParameterElement :
     public ParameterElement<int>
 {
 private:
-    // !!! use maxDigit !!! ???????
-
+    
     int maxValueLength = 6;
 
     int curDigit = 1;
@@ -27,13 +26,13 @@ private:
 
 public:
 
-    IntParameterElement(std::string name, int defaultValue) :
-        ParameterElement<int>(name, defaultValue) {
+    IntParameterElement(std::string name, int defaultValue, int minVal, int maxVal) :
+        ParameterElement<int>(name, defaultValue, minVal, maxVal) {
 
     };
 
     IntParameterElement(std::string name, int defaultValue, int _maxValueLength) :
-        ParameterElement<int>(name, defaultValue),
+        ParameterElement<int>(name, defaultValue, INT_MIN, INT_MAX),
         maxValueLength(_maxValueLength) {
 
     };
@@ -44,13 +43,20 @@ public:
     };
 
     void incCurValueDigit() override {
-        // check value length limitations
-        if (getLength(ParameterElement<int>::value + curDigit) <= maxValueLength)
-            ParameterElement<int>::value += curDigit;
+        
+        if (isValidForChange(ParameterElement<int>::value + curDigit)) {
+            ParameterElement<int>::value = ParameterElement<int>::value + curDigit;
+        }
+
+        if (getValueLength() > getDigitLength()) curDigit *= 10;
     };
 
     void decCurValueDigit() override {
-        ParameterElement<int>::value -= curDigit;
+
+        if (isValidForChange(ParameterElement<int>::value - curDigit)) {
+            ParameterElement<int>::value = ParameterElement<int>::value - curDigit;
+        }
+
         if (getValueLength() < getDigitLength()) curDigit /= 10;
     };
 
@@ -61,11 +67,19 @@ public:
 
     void decDigit() override {
         if (curDigit > 1) curDigit /= 10;
-        else curDigit = pow(10, getValueLength() - 1); // unsafe, write your own function
+        else curDigit = pow(10, getValueLength() - 1); // TODO unsafe, write your own function
     };
 
+    bool isLastDigit() {
+        return getDigitLength() == getValueLength();
+    }
+
+    bool isValidForChange(int expectedValue) override {
+        return (getDigitLength() < maxValueLength && expectedValue <= maxEditValue && expectedValue >= minEditValue);
+    }
+
     void addNewDigitLeft() override {
-        if (getDigitLength() < maxValueLength && getDigitLength() == getValueLength()) {
+        if (isValidForChange(IndicatorElement<int>::value + curDigit * 10) && isLastDigit()) {
             curDigit *= 10;
             incCurValueDigit();
         }

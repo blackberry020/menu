@@ -20,9 +20,9 @@ int main() {
             new FolderElement("C", {
                     new IndicatorElement<int>("PI40", 0),
                     new IndicatorElement<int>("PI45", 0),
-                    new IndicatorElement<int>("PI412", 0),
-                    new IntParameterElement("P1", 123)
-                })
+                    new IndicatorElement<int>("PI412", 0),     // function and bool might be absent (2)
+                    new IntParameterElement("P1", 123, 0, 1000)         // TODO + max min edit value
+                })                                             // TODO + ptr function for external stuff, bool if should be called when forming menu in constructor
             }),
         new TestStorage(std::time(0))
     );
@@ -75,15 +75,13 @@ int main() {
                     }
                 }
             }
-            else {
-                if (inp.EventType == KEY_EVENT && inp.Event.KeyEvent.wVirtualKeyCode == VK_LEFT)
-                {
+            else if (inp.EventType == KEY_EVENT && inp.Event.KeyEvent.wVirtualKeyCode == VK_LEFT)
+                 {
                     if (cntLeftPressed == 1) inputDevice << Key::Left;
                     else inputDevice << Key::LongLeft;
 
                     cntLeftPressed = 0;
-                }
-            }
+                 }
         }
         menu->update();
         Sleep(100);
