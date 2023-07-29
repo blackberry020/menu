@@ -80,27 +80,27 @@ public:
     }
 
     void addNewDigitLeft() override {
-        if (isValidForChange(IndicatorElement<int>::value + curDigit * 10) && isLastDigit()) {
+
+        int expectedValue = IndicatorElement<int>::value;
+
+        if (expectedValue < 0) expectedValue -= curDigit * 10;
+        else expectedValue += curDigit * 10;
+
+        if (isValidForChange(expectedValue) && isLastDigit()) {
             curDigit *= 10;
-            incCurValueDigit();
+            IndicatorElement<int>::value = expectedValue;
         }
     }
 
     std::string getEditViewValue() override {
 
-        fstream local("localDebug.txt", std::fstream::out);
-        
         std::string res = std::to_string(ParameterElement<int>::value);
         int curDigitIndex = getValueLength() - std::to_string(curDigit).length();
 
-        int dop = getValueLength();
-
-        local << res << " " << dop << " " << curDigitIndex;
+        if (ParameterElement<int>::value < 0) curDigitIndex++;
         
         res.insert(curDigitIndex, "[");
         res.insert(curDigitIndex + 2, "]");
-
-        local.close();
 
         return res;
     }

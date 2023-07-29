@@ -11,7 +11,6 @@ void MenuInterface::update() {
 		"\n" + openedElementsSequence.top()->getContent(isEditMode);
 }
 
-// By default, edit mode is false (when device started)
 MenuInterface::MenuInterface(OutputDevice * oDevice, SettingsStorageInterface* _storage, FolderElement* rootFolder) : 
 	outputDevice(oDevice),
 	storage(_storage),
@@ -86,7 +85,6 @@ void MenuInterface::keyPressed(Key key) {
 				break;
 
 			case Key::Escape:
-				// cancel value editing 
 				isEditMode = false;
 				curElement->getCurSubElement()->cancelValueChanges();
 				break;
@@ -105,7 +103,6 @@ void MenuInterface::keyPressed(Key key) {
 		switch (key)
 		{
 		case Key::Up:
-			// we cannot up, if we are at the root
 			if (openedElementsSequence.size() > 1)
 				openedElementsSequence.pop();
 			break;
