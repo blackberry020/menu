@@ -7,7 +7,7 @@ class IntParameterElement :
 {
 private:
     
-    int maxValueLength = 6;
+    int maxValueLength = 6;  // move to output device
 
     int curDigit = 1;
 
@@ -20,6 +20,7 @@ private:
     }
 
     int getLength(int num) {
+        if (num < 0) num *= -1;  //needed?
         return std::to_string(num).length();
     }
 
@@ -48,7 +49,7 @@ public:
             ParameterElement<int>::value = ParameterElement<int>::value + curDigit;
         }
 
-        if (getValueLength() > getDigitLength()) curDigit *= 10;
+        if (getValueLength() < getDigitLength()) curDigit /= 10;
     };
 
     void decCurValueDigit() override {
@@ -86,13 +87,20 @@ public:
     }
 
     std::string getEditViewValue() override {
+
+        fstream local("localDebug.txt", std::fstream::out);
         
         std::string res = std::to_string(ParameterElement<int>::value);
         int curDigitIndex = getValueLength() - std::to_string(curDigit).length();
+
+        int dop = getValueLength();
+
+        local << res << " " << dop << " " << curDigitIndex;
         
-        // select a digit in number
         res.insert(curDigitIndex, "[");
         res.insert(curDigitIndex + 2, "]");
+
+        local.close();
 
         return res;
     }
