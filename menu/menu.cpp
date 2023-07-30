@@ -21,7 +21,7 @@ int main() {
                     new IndicatorElement<int>("PI40", 0),
                     new IndicatorElement<int>("PI45", 0),
                     new IndicatorElement<int>("PI412", 0),     // function and bool might be absent (2)
-                    new IntParameterElement("P1", 0, -100, 100)         // TODO + max min edit value
+                    new IntParameterElement("P1", 0, -100, 100)
                 })                                             // TODO + ptr function for external stuff, bool if should be called when forming menu in constructor
             }),
         new TestStorage(std::time(0))

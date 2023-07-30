@@ -7,7 +7,7 @@ class IntParameterElement :
 {
 private:
     
-    int maxValueLength = 6;  // move to output device
+    int maxValueLength = 6;  // TODO move to output device
 
     int curDigit = 1;
 
@@ -20,7 +20,7 @@ private:
     }
 
     int getLength(int num) {
-        if (num < 0) num *= -1;  //needed?
+        if (num < 0) num *= -1;
         return std::to_string(num).length();
     }
 
