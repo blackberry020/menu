@@ -16,7 +16,7 @@ private:
     }
 
     int getValueLength() {
-        return getLength(ParameterElement<int>::value);
+        return getLength(ParameterElement<int>::getValue());
     }
 
     int getLength(int num) {
@@ -45,8 +45,8 @@ public:
 
     void incCurValueDigit() override {
         
-        if (isValidForChange(ParameterElement<int>::value + curDigit)) {
-            ParameterElement<int>::value = ParameterElement<int>::value + curDigit;
+        if (isValidForChange(ParameterElement<int>::getValue() + curDigit)) {
+            ParameterElement<int>::setValue(ParameterElement<int>::getValue() + curDigit);
         }
 
         if (getValueLength() < getDigitLength()) curDigit /= 10;
@@ -54,8 +54,8 @@ public:
 
     void decCurValueDigit() override {
 
-        if (isValidForChange(ParameterElement<int>::value - curDigit)) {
-            ParameterElement<int>::value = ParameterElement<int>::value - curDigit;
+        if (isValidForChange(ParameterElement<int>::getValue() - curDigit)) {
+            ParameterElement<int>::setValue(ParameterElement<int>::getValue() - curDigit);
         }
 
         if (getValueLength() < getDigitLength()) curDigit /= 10;
@@ -81,23 +81,23 @@ public:
 
     void addNewDigitLeft() override {
 
-        int expectedValue = IndicatorElement<int>::value;
+        int expectedValue = IndicatorElement<int>::getValue();
 
         if (expectedValue < 0) expectedValue -= curDigit * 10;
         else expectedValue += curDigit * 10;
 
         if (isValidForChange(expectedValue) && isLastDigit()) {
             curDigit *= 10;
-            IndicatorElement<int>::value = expectedValue;
+            IndicatorElement<int>::setValue(expectedValue);
         }
     }
 
     std::string getEditViewValue() override {
 
-        std::string res = std::to_string(ParameterElement<int>::value);
+        std::string res = std::to_string(ParameterElement<int>::getValue());
         int curDigitIndex = getValueLength() - std::to_string(curDigit).length();
 
-        if (ParameterElement<int>::value < 0) curDigitIndex++;
+        if (ParameterElement<int>::getValue() < 0) curDigitIndex++;
         
         res.insert(curDigitIndex, "[");
         res.insert(curDigitIndex + 2, "]");

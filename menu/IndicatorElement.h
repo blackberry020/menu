@@ -8,7 +8,7 @@ using namespace std;
 template<class T>
 class IndicatorElement : public AbstractElement
 {
-protected:
+private:
 	T value;
 public :
 
@@ -27,8 +27,8 @@ public :
 	}
 
 	std::string getContent(bool isEditMode) override {
-		value = getStorage()->getValue(getElementName(), value);
-		return "[I] " + getElementName() + "\t" + StrConverter::toString(value);
+		setValue(getStorage()->getValue(getElementName(), getValue()));
+		return "[I] " + getElementName() + "\t" + StrConverter::toString(getValue());
 	}
 
 	std::string getPreview(bool isEditMode) override {

@@ -16,8 +16,8 @@ using namespace std;
 int main() {
     Win32Menu* menu = new Win32Menu(
         new FolderElement("root", {
-                new IntParameterElement("MAX_WEIGHT", 0, 0, 1000),
-                new IntParameterElement("CUR_WEIGHT", 0, 0, 1000),
+                new IntParameterElement("MAX_WEIGHT", 450, 0, 1000),
+                new IntParameterElement("CUR_WEIGHT", 70, 0, 1000),
                 new IndicatorElement<int>("WEIGHT LOAD", 0)
             }),
         new TestStorage(std::time(0))

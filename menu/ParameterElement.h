@@ -27,7 +27,7 @@ public:
         if (isEditMode)
             return IndicatorElement<T>::getElementName() + "\t" + getEditViewValue();
         // so we can differ P - parameter and I - indicator
-        return "[P] " + IndicatorElement<T>::getElementName() + "\t" + StrConverter::toString(IndicatorElement<T>::value);
+        return "[P] " + IndicatorElement<T>::getElementName() + "\t" + StrConverter::toString(IndicatorElement<T>::getValue());
     }
 
     std::string getPreview(bool isEditMode) override {
@@ -46,17 +46,17 @@ public:
     //
 
     void prepareForEditing() override {
-        valueBackup = IndicatorElement<T>::value;
+        valueBackup = IndicatorElement<T>::getValue();
     };
 
     void cancelValueChanges() override {
-        IndicatorElement<T>::value = valueBackup;
+        IndicatorElement<T>::setValue(valueBackup);
     }
 
     void saveChanges() override {
         IndicatorElement<T>::getStorage()->setValue(
             IndicatorElement<T>::getElementName(),
-            IndicatorElement<T>::value
+            IndicatorElement<T>::getValue()
         );
     }
 };
