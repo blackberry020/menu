@@ -103,13 +103,10 @@ void MenuInterface::keyPressed(Key key) {
 		switch (key)
 		{
 		case Key::Up:
-			if (openedElementsSequence.size() > 1)
-				openedElementsSequence.pop();
+			
 			break;
 		case Key::Down:
-			if (curElement->requestOpenSubElement()) {
-				openedElementsSequence.push(curElement->getCurSubElement());
-			}
+			
 			break;
 		case Key::Left:
 			curElement->goPrevElement();
@@ -121,10 +118,14 @@ void MenuInterface::keyPressed(Key key) {
 			isEditMode = curElement->requestEditModeSubElement();
 			if (isEditMode)
 				curElement->getCurSubElement()->prepareForEditing();
+			else if (curElement->requestOpenSubElement()) {
+				openedElementsSequence.push(curElement->getCurSubElement());
+			}
 			break;
 
 		case Key::Escape:
-			//ignore
+			if (openedElementsSequence.size() > 1)
+				openedElementsSequence.pop();
 			break;
 		default:
 			break;
