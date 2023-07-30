@@ -8,8 +8,5 @@ public:
 
 	friend OutputDevice* operator<<(OutputDevice* device, const std::string& data);
 	friend OutputDevice& operator<<(OutputDevice& device, const std::string& data);
-
-private:
-
 };
 

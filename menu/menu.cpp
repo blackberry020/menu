@@ -16,13 +16,9 @@ using namespace std;
 int main() {
     Win32Menu* menu = new Win32Menu(
         new FolderElement("root", {
-            new IndicatorElement<int>("PI_TIMER", 4),
-            new FolderElement("C", {
-                    new IndicatorElement<int>("PI40", 0),
-                    new IndicatorElement<int>("PI45", 0),
-                    new IndicatorElement<int>("PI412", 0),     // function and bool might be absent (2)
-                    new IntParameterElement("P1", 0, -100, 100)
-                })                                             // TODO + ptr function for external stuff, bool if should be called when forming menu in constructor
+                new IntParameterElement("MAX_WEIGHT", 0, 0, 1000),
+                new IntParameterElement("CUR_WEIGHT", 0, 0, 1000),
+                new IndicatorElement<int>("WEIGHT LOAD", 0)
             }),
         new TestStorage(std::time(0))
     );
