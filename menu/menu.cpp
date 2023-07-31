@@ -16,6 +16,11 @@ using namespace std;
 int main() {
     Win32Menu* menu = new Win32Menu(
         new FolderElement("root", {
+                new FolderElement("root1", {
+                        new FolderElement("root2", {
+                                new FolderElement("root3", { new IntParameterElement("DOP", 450, 0, 1000) })
+                            })
+                    }),
                 new IntParameterElement("MAX_WEIGHT", 450, 0, 1000),
                 new IntParameterElement("CUR_WEIGHT", 70, 0, 1000),
                 new IndicatorElement<int>(
@@ -25,7 +30,6 @@ int main() {
             }),
         new TestStorage(std::time(0))
     );
-
 
     InputDevice* inputDevice = new InputDevice(menu);
 
