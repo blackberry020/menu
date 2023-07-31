@@ -95,5 +95,11 @@
     <ClInclude Include="Key.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ElementSpeaker.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Notifier.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

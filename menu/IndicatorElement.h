@@ -2,11 +2,10 @@
 #include "AbstractElement.h"
 #include "SettingsStorage.h"
 #include "StrConverter.h"
+#include "ElementSpeaker.h"
 #include <fstream>
 #include <functional>
 using namespace std;
-
-
 
 template<class T>
 class IndicatorElement : public AbstractElement
@@ -14,6 +13,7 @@ class IndicatorElement : public AbstractElement
 private:
 	T value;
 	std::function<T(T, SettingsStorageInterface*)> recalculateFunction = [](T oldValue, SettingsStorageInterface*) { return oldValue; };
+	ElementSpeaker* elementSpeaker;
 public :
 
 	IndicatorElement(std::string name, T defaultValue) : AbstractElement(name) {
@@ -23,12 +23,16 @@ public :
 	IndicatorElement(
 		std::string name,
 		T defaultValue,
-		std::function<T(T, SettingsStorageInterface*)> recalcFunction
+		ElementSpeaker* speaker,
+		std::function<T(T, SettingsStorageInterface*)> _recalculateFunction
 	)
 		: AbstractElement(name),
-		recalculateFunction(recalcFunction)
+		recalculateFunction(_recalculateFunction),
+		elementSpeaker(speaker)
 	{
 		value = defaultValue;
+
+		elementSpeaker->notifier->addElement(this);
 	}
 
 	// ??? add constructor with children (multi-indicator)
@@ -41,17 +45,21 @@ public :
 		value = newValue;
 	}
 
-	void recalculate() {
+	void updateElement() override {
 		// recalculating a value
-		value = recalculateFunction();
+		value = recalculateFunction(value, getStorage());
 
 		// updating value in a storage
-		getStorage()->setValue(value);
+		getStorage()->setValue(getElementName(), value);
 	}
 
 	std::string getContent(bool isEditMode) override {
 		// udpating value from storage(sensors)
-		value = getStorage()->getValue(getElementName(), value);
+		T curValue = getStorage()->getValue(getElementName(), value);
+		if (curValue != value) {
+			elementSpeaker->valueChanged();
+		}
+		value = curValue;
 		return "[I] " + getElementName() + "\t" + StrConverter::toString(value);
 	}
 

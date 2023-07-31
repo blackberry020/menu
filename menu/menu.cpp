@@ -10,10 +10,13 @@
 #include <vector>
 #include <fstream>
 #include <ctime>
+#include "ElementSpeaker.h"
 #include <functional>
 using namespace std;
 
 int main() {
+    Notifier* n1 = new Notifier();
+
     Win32Menu* menu = new Win32Menu(
         new FolderElement("root", {
                 new FolderElement("root1", {
@@ -24,9 +27,11 @@ int main() {
                 new IntParameterElement("MAX_WEIGHT", 450, 0, 1000),
                 new IntParameterElement("CUR_WEIGHT", 70, 0, 1000),
                 new IndicatorElement<int>(
-                    "WEIGHT LOAD", 0,[](int oldValue, SettingsStorageInterface* storage) {
+                    "WEIGHT LOAD", 0,
+                    new ElementSpeaker(n1),
+                    [](int oldValue, SettingsStorageInterface* storage) {
                         return oldValue;
-                    })
+                    }),
             }),
         new TestStorage(std::time(0))
     );

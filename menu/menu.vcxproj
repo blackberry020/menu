@@ -143,12 +143,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AbstractElement.h" />
+    <ClInclude Include="ElementSpeaker.h" />
     <ClInclude Include="FolderElement.h" />
     <ClInclude Include="Key.h" />
     <ClInclude Include="IndicatorElement.h" />
     <ClInclude Include="InputDevice.h" />
     <ClInclude Include="IntParameterElement.h" />
     <ClInclude Include="MenuInterface.h" />
+    <ClInclude Include="Notifier.h" />
     <ClInclude Include="OutputDevice.h" />
     <ClInclude Include="ParameterElement.h" />
     <ClInclude Include="SettingsStorage.h" />

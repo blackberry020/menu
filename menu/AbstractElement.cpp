@@ -51,7 +51,12 @@ int AbstractElement::getAmountOfSubElements() {
 
 int AbstractElement::getCurIndexOfSubElement() {
 	return curIndexOfSubElement;
-};
+}
+void AbstractElement::updateElement()
+{
+
+}
+;
 
 void AbstractElement::cancelValueChanges() {
 	// no reaction by default

@@ -44,6 +44,8 @@ public :
 
 	//functions
 
+	virtual void updateElement();
+
 	virtual std::string getContent(bool isEditMode) = 0;
 	virtual std::string getPreview(bool isEditMode) = 0;
 

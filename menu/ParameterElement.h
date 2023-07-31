@@ -19,6 +19,23 @@ public:
         minEditValue = minVal;
         maxEditValue = maxVal;
     };
+
+    ParameterElement(
+        std::string name,
+        T defaultValue, 
+        T minVal, 
+        T maxVal,
+        ElementSpeaker* speaker,
+        std::function<T(T, SettingsStorageInterface*)> _recalculateFunction
+    ) : IndicatorElement<T>(
+        name,
+        defaultValue,
+        speaker,
+        _recalculateFunction
+    ) {
+        minEditValue = minVal;
+        maxEditValue = maxVal;
+    }
     
     virtual std::string getEditViewValue() = 0;
     virtual bool isValidForChange(T) = 0;
