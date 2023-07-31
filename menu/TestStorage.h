@@ -1,12 +1,16 @@
 #pragma once
 #include "SettingsStorage.h"
 #include <ctime>
+#include <map>
 class TestStorage :
     public SettingsStorageInterface
 {
 private:
 
 	int startTime;
+	int v;
+
+	std::map<std::string, int> storageMap;
 
     int getValue(std::string id, int defaultValue) override;
 	bool getValue(std::string id, bool defaultValue) override;

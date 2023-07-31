@@ -15,7 +15,7 @@
 using namespace std;
 
 int main() {
-    Notifier* n1 = new Notifier();
+    Notifier* weightNotifier = new Notifier();
 
     Win32Menu* menu = new Win32Menu(
         new FolderElement("root", {
@@ -24,13 +24,17 @@ int main() {
                                 new FolderElement("root3", { new IntParameterElement("DOP", 450, 0, 1000) })
                             })
                     }),
-                new IntParameterElement("MAX_WEIGHT", 450, 0, 1000),
-                new IntParameterElement("CUR_WEIGHT", 70, 0, 1000),
+                new IntParameterElement(
+                    "MAX_WEIGHT", 0, 0, 1000,
+                    new ElementSpeaker(weightNotifier)),
+                new IntParameterElement(
+                    "CUR_WEIGHT", 0, 0, 1000,
+                    new ElementSpeaker(weightNotifier)),
                 new IndicatorElement<int>(
-                    "WEIGHT LOAD", 0,
-                    new ElementSpeaker(n1),
+                    "WEIGHT_LOAD", 0,
+                    new ElementSpeaker(weightNotifier),
                     [](int oldValue, SettingsStorageInterface* storage) {
-                        return oldValue;
+                        return ((storage->getValue("CUR_WEIGHT", 0) / (double)storage->getValue("MAX_WEIGHT", 1)) * 100);
                     }),
             }),
         new TestStorage(std::time(0))

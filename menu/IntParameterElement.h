@@ -1,7 +1,8 @@
 #pragma once
 #include "ParameterElement.h"
 #include "math.h"
-
+#include "ElementSpeaker.h"
+#include <functional>
 class IntParameterElement :
     public ParameterElement<int>
 {
@@ -31,6 +32,19 @@ public:
         ParameterElement<int>(name, defaultValue, minVal, maxVal) {
 
     };
+
+    IntParameterElement(
+        std::string name,
+        int defaultValue,
+        int minVal,
+        int maxVal,
+        ElementSpeaker* speaker,
+        std::function<int(int, SettingsStorageInterface*)> _recalculateFunction = [](int v, SettingsStorageInterface*) { return v; }
+        ) :
+        ParameterElement<int>(name, defaultValue, minVal, maxVal, speaker, _recalculateFunction) {
+
+    };
+
 
 
     IntParameterElement(std::string name, int defaultValue, int _maxValueLength) :

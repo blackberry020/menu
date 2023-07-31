@@ -14,6 +14,11 @@ private:
 	T value;
 	std::function<T(T, SettingsStorageInterface*)> recalculateFunction = [](T oldValue, SettingsStorageInterface*) { return oldValue; };
 	ElementSpeaker* elementSpeaker;
+
+protected:
+	ElementSpeaker* getElementSpeaker() {
+		return elementSpeaker;
+	}
 public :
 
 	IndicatorElement(std::string name, T defaultValue) : AbstractElement(name) {
@@ -31,7 +36,6 @@ public :
 		elementSpeaker(speaker)
 	{
 		value = defaultValue;
-
 		elementSpeaker->notifier->addElement(this);
 	}
 
@@ -78,6 +82,7 @@ public :
 	void injectStorage(SettingsStorageInterface* s) override {
 		AbstractElement::injectStorage(s);
 		value = getStorage()->getValue(getElementName(), value);
+		updateElement();
 	}
 
 	

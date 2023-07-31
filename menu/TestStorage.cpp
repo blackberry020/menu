@@ -1,20 +1,18 @@
 #include "TestStorage.h"
 
 TestStorage::TestStorage(int _startTime) : startTime(_startTime){
-    
+    storageMap = {
+        {"MAX_WEIGHT", 450},
+        {"CUR_WEIGHT", 70},
+        {"WEIGHT_LOAD", 4},
+    };
 }
 
 int TestStorage::getValue(std::string id, int defaultValue)
 {
-    if (id == "PI40")
-        return 5;
-    if (id == "PI45")
-        return 12;
-    if (id == "PI412")
-        return -4;
     if (id == "PI_TIMER")
         return std::time(0) - startTime;
-    return defaultValue;
+    return storageMap[id];
 }
 
 bool TestStorage::getValue(std::string id, bool defaultValue)
@@ -33,7 +31,7 @@ std::string TestStorage::getValue(std::string id, std::string defaultValue)
 
 void TestStorage::setValue(std::string id, int value)
 {
-
+    storageMap[id] = value;
 }
 
 void TestStorage::setValue(std::string id, bool value)

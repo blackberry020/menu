@@ -26,7 +26,7 @@ public:
         T minVal, 
         T maxVal,
         ElementSpeaker* speaker,
-        std::function<T(T, SettingsStorageInterface*)> _recalculateFunction
+        std::function<T(T, SettingsStorageInterface*)> _recalculateFunction = [](T v, SettingsStorageInterface*) { return v; }
     ) : IndicatorElement<T>(
         name,
         defaultValue,
@@ -75,6 +75,9 @@ public:
             IndicatorElement<T>::getElementName(),
             IndicatorElement<T>::getValue()
         );
+
+        IndicatorElement<T>::getElementSpeaker()->valueChanged();
+
     }
 };
 
