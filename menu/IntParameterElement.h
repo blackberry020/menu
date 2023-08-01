@@ -64,7 +64,7 @@ public:
             ParameterElement<int>::setValue(ParameterElement<int>::getValue() + curDigit);
         }
 
-        if (getValueLength() < getDigitLength()) curDigit /= 10;
+        if (getValueLength() < getDigitLength()) fullUpdateCurDigit();
     };
 
     void decCurValueDigit() override {
@@ -73,7 +73,7 @@ public:
             ParameterElement<int>::setValue(ParameterElement<int>::getValue() - curDigit);
         }
 
-        if (getValueLength() < getDigitLength()) curDigit /= 10;
+        if (getValueLength() < getDigitLength()) fullUpdateCurDigit();
     };
 
     void incDigit() override {
@@ -81,9 +81,13 @@ public:
         else curDigit = 1;
     };
 
+    void fullUpdateCurDigit() {
+        curDigit = pow(10, getValueLength() - 1); // TODO unsafe, write your own function
+    }
+
     void decDigit() override {
         if (curDigit > 1) curDigit /= 10;
-        else curDigit = pow(10, getValueLength() - 1); // TODO unsafe, write your own function
+        else fullUpdateCurDigit();
     };
 
     bool isLastDigit() {
