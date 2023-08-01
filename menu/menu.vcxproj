@@ -143,6 +143,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AbstractElement.h" />
+    <ClInclude Include="CVector.h" />
     <ClInclude Include="ElementSpeaker.h" />
     <ClInclude Include="FolderElement.h" />
     <ClInclude Include="Key.h" />

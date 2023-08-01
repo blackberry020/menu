@@ -101,5 +101,8 @@
     <ClInclude Include="Notifier.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CVector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
