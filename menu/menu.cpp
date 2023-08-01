@@ -22,7 +22,7 @@ int main() {
 
     CArray<int> a;
     a.pushBack(12);
-    local << a[0] << " " << a[1];
+    local << a[0];
 
     local.close();
 

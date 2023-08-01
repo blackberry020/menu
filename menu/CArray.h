@@ -10,8 +10,8 @@ private:
 
 public:
 
-	CArray() {
-		length = 0;
+	CArray() : length(0) {
+		arr = new T[1];
 	}
 	
 	CArray(int _length) : length(_length) {
