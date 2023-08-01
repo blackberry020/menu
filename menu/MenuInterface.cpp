@@ -103,10 +103,13 @@ void MenuInterface::keyPressed(Key key) {
 		switch (key)
 		{
 		case Key::Up:
-			
+			if (openedElementsSequence.size() > 1)
+				openedElementsSequence.pop();
 			break;
 		case Key::Down:
-			
+			if (curElement->requestOpenSubElement()) {
+				openedElementsSequence.push(curElement->getCurSubElement());
+			}
 			break;
 		case Key::Left:
 			curElement->goPrevElement();

@@ -1,6 +1,6 @@
 #include "AbstractElement.h"
 
-AbstractElement::AbstractElement(std::string name, std::vector <AbstractElement*> _subElements) : 
+AbstractElement::AbstractElement(std::string name, CArray <AbstractElement*> _subElements) : 
 	elementName(name),
 	curIndexOfSubElement(0),
 	subElements(_subElements)
@@ -8,7 +8,7 @@ AbstractElement::AbstractElement(std::string name, std::vector <AbstractElement*
 	amountOfSubElements = subElements.size();
 }
 
-AbstractElement::AbstractElement(std::string name, SettingsStorageInterface* storageInterface, std::vector <AbstractElement*> _subElements) :
+AbstractElement::AbstractElement(std::string name, SettingsStorageInterface* storageInterface, CArray <AbstractElement*> _subElements) :
 	elementName(name),
 	curIndexOfSubElement(0),
 	subElements(_subElements)
@@ -37,7 +37,7 @@ std::string AbstractElement::getElementName() {
 	return elementName;
 }
 
-std::vector <AbstractElement*> AbstractElement::getSubElements() {
+CArray <AbstractElement*> AbstractElement::getSubElements() {
 	return subElements;
 };
 
@@ -112,8 +112,8 @@ void AbstractElement::goNextElement() {
 void AbstractElement::injectStorage(SettingsStorageInterface* storageInterface)
 {
 	storage = storageInterface;
-	for (AbstractElement* el : subElements) {
-		el->injectStorage(storage);
+	for (int i = 0; i < subElements.size(); i++) {
+		subElements[i]->injectStorage(storage);
 	}
 }
 

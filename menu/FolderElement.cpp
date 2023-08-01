@@ -9,13 +9,13 @@ bool FolderElement::isEditable() {
 }
 
 
-FolderElement::FolderElement(std::string name, std::vector <AbstractElement*> _subElements) :
+FolderElement::FolderElement(std::string name, CArray <AbstractElement*> _subElements) :
 	AbstractElement(name, _subElements)
 {
 
 }
 
-FolderElement::FolderElement(std::string name, SettingsStorageInterface* storageInterface, std::vector <AbstractElement*> _subElements) :
+FolderElement::FolderElement(std::string name, SettingsStorageInterface* storageInterface, CArray <AbstractElement*> _subElements) :
 	AbstractElement(name, storageInterface, _subElements)
 {
 }

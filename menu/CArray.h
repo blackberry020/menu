@@ -14,14 +14,23 @@ public:
 		arr = new T[1];
 	}
 	
-	CArray(int _length) : length(_length) {
+	explicit CArray(int _length) : length(_length) {
 		arr = new T[_length];
 	}
 
-	CArray(T* _arr) : arr(_arr) {};
+	
+	CArray(T * _arr, int _length) : arr(_arr), length(_length) {
 
-	~CArray() {
+	};
+
+	// Error with destructor !!!!!!!!!!!!
+	/*~CArray() {
 		delete[] arr;
+	}*/
+	
+	CArray& operator=(T* other) {
+		arr = other;
+		return *this;
 	}
 
 	int arrayLength() {
@@ -50,6 +59,10 @@ public:
 	void pushBack(T dop) {
 		arr[length] = dop;
 		length++;
+	}
+
+	int size() {
+		return length;
 	}
 
 };

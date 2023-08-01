@@ -1,15 +1,14 @@
 #pragma once
 #include <string>
 #include <iostream>
-#include <vector>
 #include "SettingsStorage.h"
-
+#include "CArray.h"
 class AbstractElement
 {
 
 private:
 	std::string elementName = "no_name";
-	std::vector <AbstractElement*> subElements;
+	CArray<AbstractElement*> subElements;
 	SettingsStorageInterface* storage = nullptr;
 	int amountOfSubElements = 0;
 	int curIndexOfSubElement = 0;
@@ -22,10 +21,10 @@ public :
 	explicit AbstractElement(std::string name);
 
 	// 2. element with children
-	explicit AbstractElement(std::string name, std::vector <AbstractElement*> _subElements);
+	explicit AbstractElement(std::string name, CArray <AbstractElement*> _subElements);
 
 	// 3. for root folder (children + each child injection)
-	explicit AbstractElement(std::string name, SettingsStorageInterface* storageInterface, std::vector <AbstractElement*> _subElements);
+	explicit AbstractElement(std::string name, SettingsStorageInterface* storageInterface, CArray <AbstractElement*> _subElements);
 	
 
 	virtual ~AbstractElement();
@@ -37,7 +36,7 @@ public :
 
 	// getters
 	std::string getElementName();
-	std::vector <AbstractElement*> getSubElements();
+	CArray <AbstractElement*> getSubElements();
 	SettingsStorageInterface* getStorage();
 	int getAmountOfSubElements();
 	int getCurIndexOfSubElement();

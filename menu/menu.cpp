@@ -7,7 +7,7 @@
 #include "IndicatorElement.h"
 #include "Key.h"
 #include <Windows.h>
-#include <vector>
+#include "CArray.h"
 #include <fstream>
 #include <ctime>
 #include "ElementSpeaker.h"
@@ -17,15 +17,18 @@ using namespace std;
 
 int main() {
 
+    // EXAMPLE of Initializing CArray
+    // CArray<int*> a = { new int* [3] {new int, new int, new int}, 3};
+
     Notifier* weightNotifier = new Notifier();
 
     Win32Menu* menu = new Win32Menu(
-        new FolderElement("root", {
-                new FolderElement("root1", {
-                        new FolderElement("root2", {
-                                new FolderElement("root3", { new IntParameterElement("DOP", 450, 0, 1000) })
-                            })
-                    }),
+        new FolderElement("root", { new AbstractElement * [4] {
+                new FolderElement("root1", { new AbstractElement * [1] {
+                        new FolderElement("root2", { new AbstractElement * [1] {
+                                new FolderElement("root3", { new AbstractElement * [1] { new IntParameterElement("DOP", 450, 0, 1000) }, 1})
+                            }, 1})
+                    }, 1}),
                 new IntParameterElement(
                     "MAX_WEIGHT", 0, 0, 1000,
                     new ElementSpeaker(weightNotifier)),
@@ -38,7 +41,7 @@ int main() {
                     [](int oldValue, SettingsStorageInterface* storage) {
                         return ((storage->getValue("CUR_WEIGHT", 0) / (double)storage->getValue("MAX_WEIGHT", 1)) * 100);
                     }),
-            }),
+            }, 4 }),
         new TestStorage(std::time(0))
     );
 
