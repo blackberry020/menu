@@ -25,13 +25,10 @@ private:
         return std::to_string(num).length();
     }
 
-
 public:
 
     IntParameterElement(std::string name, int defaultValue, int minVal, int maxVal) :
-        ParameterElement<int>(name, defaultValue, minVal, maxVal) {
-
-    };
+        ParameterElement<int>(name, defaultValue, minVal, maxVal) {};
 
     IntParameterElement(
         std::string name,
@@ -41,17 +38,11 @@ public:
         ElementSpeaker* speaker,
         std::function<int(int, SettingsStorageInterface*)> _recalculateFunction = [](int v, SettingsStorageInterface*) { return v; }
         ) :
-        ParameterElement<int>(name, defaultValue, minVal, maxVal, speaker, _recalculateFunction) {
-
-    };
-
-
+        ParameterElement<int>(name, defaultValue, minVal, maxVal, speaker, _recalculateFunction) {};
 
     IntParameterElement(std::string name, int defaultValue, int _maxValueLength) :
         ParameterElement<int>(name, defaultValue, INT_MIN, INT_MAX),
-        maxValueLength(_maxValueLength) {
-
-    };
+        maxValueLength(_maxValueLength) {};
 
     void prepareForEditing() override {
         ParameterElement<int>::prepareForEditing();

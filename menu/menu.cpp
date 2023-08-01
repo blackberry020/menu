@@ -12,9 +12,20 @@
 #include <ctime>
 #include "ElementSpeaker.h"
 #include <functional>
+#include "CArray.h"
 using namespace std;
 
 int main() {
+
+    fstream local;
+    local.open("localDebug.txt", std::fstream::out);
+
+    CArray<int> a;
+    a.pushBack(12);
+    local << a[0] << " " << a[1];
+
+    local.close();
+
     Notifier* weightNotifier = new Notifier();
 
     Win32Menu* menu = new Win32Menu(
