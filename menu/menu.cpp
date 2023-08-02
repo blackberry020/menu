@@ -23,10 +23,10 @@ int main() {
     Notifier* weightNotifier = new Notifier();
 
     Win32Menu* menu = new Win32Menu(
-        new FolderElement("root", { new AbstractElement * [4] {
-                new FolderElement("root1", { new AbstractElement * [1] {
-                        new FolderElement("root2", { new AbstractElement * [1] {
-                                new FolderElement("root3", { new AbstractElement * [1] { new IntParameterElement("DOP", 450, 0, 1000) }, 1})
+        new FolderElement("root", { new AbstractElement* [4] {
+                new FolderElement("root1", { new AbstractElement* [1] {
+                        new FolderElement("root2", { new AbstractElement* [1] {
+                                new FolderElement("root3", { new AbstractElement* [1] { new IntParameterElement("DOP", 450, 0, 1000) }, 1})
                             }, 1})
                     }, 1}),
                 new IntParameterElement(

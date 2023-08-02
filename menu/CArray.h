@@ -25,7 +25,7 @@ public:
 
 	// Error with destructor !!!!!!!!!!!!
 	/*~CArray() {
-		delete[] arr;
+		delete arr;
 	}*/
 	
 	CArray& operator=(T* other) {
