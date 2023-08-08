@@ -107,5 +107,11 @@
     <ClInclude Include="CArray.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ObservableObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PrettyNotifier.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

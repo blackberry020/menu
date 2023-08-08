@@ -3,7 +3,9 @@
 #include <iostream>
 #include "SettingsStorage.h"
 #include "CArray.h"
-class AbstractElement
+#include "ObservableObject.h"
+#include "PrettyNotifier.h"
+class AbstractElement : public ObservableObject
 {
 
 private:
@@ -45,12 +47,17 @@ public :
 
 	virtual void updateElement();
 
+	virtual void dataChanged(std::string changedId) override;
+	virtual void saveChanges() override;
+
 	virtual std::string getContent(bool isEditMode) = 0;
 	virtual std::string getPreview(bool isEditMode) = 0;
 
 	virtual void prepareForEditing();
 	virtual void cancelValueChanges();
-	virtual void saveChanges();
+
+	virtual void injectPrettyNotifier(PrettyNotifier* notifier);
+	
 
 	virtual void incCurValueDigit();
 	virtual void decCurValueDigit();

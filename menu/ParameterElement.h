@@ -69,16 +69,6 @@ public:
     void cancelValueChanges() override {
         IndicatorElement<T>::setValue(valueBackup);
     }
-
-    void saveChanges() override {
-        IndicatorElement<T>::getStorage()->setValue(
-            IndicatorElement<T>::getElementName(),
-            IndicatorElement<T>::getValue()
-        );
-
-        IndicatorElement<T>::getElementSpeaker()->valueChanged();
-
-    }
 };
 
 

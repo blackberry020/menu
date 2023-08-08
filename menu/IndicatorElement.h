@@ -5,6 +5,7 @@
 #include "ElementSpeaker.h"
 #include <fstream>
 #include <functional>
+#include "PrettyNotifier.h"
 using namespace std;
 
 template<class T>
@@ -14,6 +15,7 @@ private:
 	T value;
 	std::function<T(T, SettingsStorageInterface*)> recalculateFunction = [](T oldValue, SettingsStorageInterface*) { return oldValue; };
 	ElementSpeaker* elementSpeaker;
+	PrettyNotifier* prettyNotifier;
 
 protected:
 	ElementSpeaker* getElementSpeaker() {
@@ -21,9 +23,44 @@ protected:
 	}
 public :
 
+
+	// If no sub elements
 	IndicatorElement(std::string name, T defaultValue) : AbstractElement(name) {
 		value = defaultValue;
 	}
+
+	// If no sub elements and connected prettyNotifier
+	IndicatorElement(std::string name, T defaultValue, PrettyNotifier* _prettyNotifier)
+		: AbstractElement(name), prettyNotifier(_prettyNotifier) {
+		value = defaultValue;
+
+		prettyNotifier->addElement(this);
+	}
+
+	// If there are sub elements
+	IndicatorElement(std::string name, CArray<AbstractElement*> subEl) :
+		AbstractElement(name, subEl) {
+
+		prettyNotifier = new PrettyNotifier();
+		for (int i = 0; i < getSubElements().size(); i++)
+			getSubElements()[i]->injectPrettyNotifier(prettyNotifier);
+	}
+
+	// If there are sub elements and notifier
+	IndicatorElement(
+		std::string name,
+		PrettyNotifier* _prettyNotifier,
+		CArray<AbstractElement*> subEl
+	)
+		: AbstractElement(name, subEl),
+		prettyNotifier(_prettyNotifier)
+	{
+		for (int i = 0; i < getSubElements().size(); i++)
+			getSubElements()[i]->injectPrettyNotifier(prettyNotifier);
+	}
+
+
+
 
 	IndicatorElement(
 		std::string name,
@@ -39,6 +76,8 @@ public :
 		elementSpeaker->notifier->addElement(this);
 	}
 
+	
+
 	// ??? add constructor with children (multi-indicator)
 
 	T getValue() {
@@ -52,9 +91,14 @@ public :
 	void updateElement() override {
 		// recalculating a value
 		value = recalculateFunction(value, getStorage());
+	}
 
-		// updating value in a storage
+	void saveChanges() override {
 		getStorage()->setValue(getElementName(), value);
+	}
+
+	void dataChanged(std::string id) override {
+
 	}
 
 	std::string getContent(bool isEditMode) override {
@@ -83,6 +127,16 @@ public :
 		AbstractElement::injectStorage(s);
 		value = getStorage()->getValue(getElementName(), value);
 		updateElement();
+	}
+
+	void injectPrettyNotifier(PrettyNotifier* notifier) {
+		prettyNotifier = notifier;
+		if (getSubElements().size() == 0) {
+			prettyNotifier->addElement(this);
+		}
+		else
+			for (int i = 0; i < getSubElements().size(); i++)
+				getSubElements()[i]->injectPrettyNotifier(prettyNotifier);
 	}
 
 	

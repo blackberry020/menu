@@ -153,8 +153,10 @@
     <ClInclude Include="IntParameterElement.h" />
     <ClInclude Include="MenuInterface.h" />
     <ClInclude Include="Notifier.h" />
+    <ClInclude Include="ObservableObject.h" />
     <ClInclude Include="OutputDevice.h" />
     <ClInclude Include="ParameterElement.h" />
+    <ClInclude Include="PrettyNotifier.h" />
     <ClInclude Include="SettingsStorage.h" />
     <ClInclude Include="StrConverter.h" />
     <ClInclude Include="TestStorage.h" />

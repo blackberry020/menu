@@ -13,6 +13,7 @@
 #include "ElementSpeaker.h"
 #include <functional>
 #include "CArray.h"
+#include "PrettyNotifier.h"
 using namespace std;
 
 int main() {
@@ -21,7 +22,7 @@ int main() {
     // CArray<int*> a = { new int* [3] {new int, new int, new int}, 3};
 
     Notifier* weightNotifier = new Notifier();
-
+    PrettyNotifier* prettyNotifier = new PrettyNotifier();
     Win32Menu* menu = new Win32Menu(
         new FolderElement("root", { new AbstractElement* [4] {
                 new FolderElement("root1", { new AbstractElement* [1] {

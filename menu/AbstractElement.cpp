@@ -56,10 +56,17 @@ void AbstractElement::updateElement()
 {
 
 }
+void AbstractElement::dataChanged(std::string changedId)
+{
+}
 ;
 
 void AbstractElement::cancelValueChanges() {
 	// no reaction by default
+}
+
+void AbstractElement::injectPrettyNotifier(PrettyNotifier* notifier)
+{
 }
 
 void AbstractElement::prepareForEditing() {
