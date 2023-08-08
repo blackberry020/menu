@@ -101,18 +101,36 @@ public :
 
 	}
 
+	// when is multiindicator (we are inside IndicatorElement)
 	std::string getContent(bool isEditMode) override {
-		// udpating value from storage(sensors)
-		T curValue = getStorage()->getValue(getElementName(), value);
-		if (curValue != value) {
-			elementSpeaker->valueChanged();
-		}
-		value = curValue;
-		return "[I] " + getElementName() + "\t" + StrConverter::toString(value);
+
+		//T curValue = getStorage()->getValue(getSubElements()[getCurIndexOfSubElement()]->getElementName(), value);
+		//if (curValue != value) {
+		//	//elementSpeaker->valueChanged();
+		//	if (prettyNotifier != nullptr)
+		//		prettyNotifier->notifyListeners(getElementName());
+		//}
+
+		// TODO:
+		// check in each child 
+
+		// Meow meow meow meow meow meow meow
+		// Meow Meow meow meow meow meow meow
+		// Meow meow Meow meow meow meow meow
+		// Meow meow meow Meow meow meow meow
+		// Meow meow meow meow Meow meow meow
+		// Meow meow meow meow meow Meow meow
+		// Meow meow meow meow meow meow Meow 
+		// 
+		//value = curValue;
+
+		return getSubElements()[getCurIndexOfSubElement()]->getPreview(isEditMode);
+		
+		//return "[I] " + getElementName() + "\t" + StrConverter::toString(value);
 	}
 
 	std::string getPreview(bool isEditMode) override {
-		return getContent(isEditMode);
+		return "[I] " +  getElementName() + (isOpenable() ? "" : ("\t" + StrConverter::toString(value)));
 	}
 
 	// attrs
@@ -120,7 +138,7 @@ public :
 		return false;
 	}
 	bool isOpenable() override {
-		return false;
+		return getSubElements().size() != 0;
 	}
 
 	void injectStorage(SettingsStorageInterface* s) override {

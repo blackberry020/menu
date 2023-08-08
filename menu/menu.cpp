@@ -30,7 +30,7 @@ int main() {
                                 new FolderElement("root3", { new AbstractElement* [1] { new IntParameterElement("DOP", 450, 0, 1000) }, 1})
                             }, 1})
                     }, 1}),
-                new IntParameterElement(
+                /*new IntParameterElement(
                     "MAX_WEIGHT", 0, 0, 1000,
                     new ElementSpeaker(weightNotifier)),
                 new IntParameterElement(
@@ -41,7 +41,13 @@ int main() {
                     new ElementSpeaker(weightNotifier),
                     [](int oldValue, SettingsStorageInterface* storage) {
                         return ((storage->getValue("CUR_WEIGHT", 0) / (double)storage->getValue("MAX_WEIGHT", 1)) * 100);
-                    }),
+                    }),*/
+                new IndicatorElement<int>(
+                    "WEIGHT_LOAD", { new AbstractElement * [2] {
+                        new IndicatorElement<int>("A", 4),
+                        new IndicatorElement<int>("B", 6),
+                    }, 2}
+                )
             }, 4 }),
         new TestStorage(std::time(0))
     );
