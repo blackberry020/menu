@@ -45,7 +45,12 @@ public :
 
 	//functions
 
+
+	// updating data from sensors
 	virtual void updateElement();
+
+	// recalculating element if neccessary
+	virtual void recalculateElement();
 
 	virtual void dataChanged(std::string changedId) override;
 	virtual void saveChanges() override;
@@ -54,7 +59,7 @@ public :
 	virtual std::string getPreview(bool isEditMode) = 0;
 
 	virtual void prepareForEditing();
-	virtual void cancelValueChanges();
+	/*virtual void cancelValueChanges(); */
 
 	virtual void injectPrettyNotifier(PrettyNotifier* notifier);
 	

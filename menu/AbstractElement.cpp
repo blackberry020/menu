@@ -54,16 +54,18 @@ int AbstractElement::getCurIndexOfSubElement() {
 }
 void AbstractElement::updateElement()
 {
-
+	for (int i = 0; i < subElements.size(); i++)
+		subElements[i]->updateElement();
+}
+void AbstractElement::recalculateElement()
+{
+	for (int i = 0; i < subElements.size(); i++)
+		subElements[i]->recalculateElement();
 }
 void AbstractElement::dataChanged(std::string changedId)
 {
 }
 ;
-
-void AbstractElement::cancelValueChanges() {
-	// no reaction by default
-}
 
 void AbstractElement::injectPrettyNotifier(PrettyNotifier* notifier)
 {

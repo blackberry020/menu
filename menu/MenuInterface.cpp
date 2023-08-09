@@ -6,14 +6,24 @@ using namespace std;
 // update output device state;
 void MenuInterface::update() {
 	outputDevice <<
-		getInstructions() + 
-		"\n" +
-		"\n" + openedElementsSequence.top()->getContent(isEditMode);
+		getInstructions() + "\n" +
+		"[" + openedElementsSequence.top()->getElementName() + "]\n\t" +
+			"-> " + openedElementsSequence.top()->getContent(isEditMode);
 }
 
-MenuInterface::MenuInterface(OutputDevice * oDevice, SettingsStorageInterface* _storage, FolderElement* rootFolder) : 
+void MenuInterface::refreshData()
+{
+	// 1. Update all data from sensors.
+	// 2. Recalculate data depend on given info
+
+	rootFolder->updateElement();
+	rootFolder->recalculateElement();
+}
+
+MenuInterface::MenuInterface(OutputDevice * oDevice, SettingsStorageInterface* _storage, FolderElement* _rootFolder) : 
 	outputDevice(oDevice),
 	storage(_storage),
+	rootFolder(_rootFolder),
 	isEditMode(false) {
 
 	// root folder is always opened
@@ -86,7 +96,6 @@ void MenuInterface::keyPressed(Key key) {
 
 			case Key::Escape:
 				isEditMode = false;
-				curElement->getCurSubElement()->cancelValueChanges();
 				break;
 
 			case Key::Enter:

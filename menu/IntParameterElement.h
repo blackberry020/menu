@@ -16,8 +16,8 @@ private:
         return getLength(curDigit);
     }
 
-    int getValueLength() {
-        return getLength(ParameterElement   <int>::getValue());
+    int getTempValueLength() {
+        return getLength(ParameterElement<int>::getTempValue());
     }
 
     int getLength(int num) {
@@ -44,36 +44,36 @@ public:
         ParameterElement<int>(name, defaultValue, INT_MIN, INT_MAX),
         maxValueLength(_maxValueLength) {};
 
-    void prepareForEditing() override {
+    /*void prepareForEditing() override {
         ParameterElement<int>::prepareForEditing();
         curDigit = 1;
-    };
+    };*/
 
     void incCurValueDigit() override {
         
-        if (isValidForChange(ParameterElement<int>::getValue() + curDigit)) {
-            ParameterElement<int>::setValue(ParameterElement<int>::getValue() + curDigit);
+        if (isValidForChange(ParameterElement<int>::getTempValue() + curDigit)) {
+            ParameterElement<int>::setTempValue(ParameterElement<int>::getTempValue() + curDigit);
         }
 
-        if (getValueLength() < getDigitLength()) fullUpdateCurDigit();
+        if (getTempValueLength() < getDigitLength()) fullUpdateCurDigit();
     };
 
     void decCurValueDigit() override {
 
-        if (isValidForChange(ParameterElement<int>::getValue() - curDigit)) {
-            ParameterElement<int>::setValue(ParameterElement<int>::getValue() - curDigit);
+        if (isValidForChange(ParameterElement<int>::getTempValue() - curDigit)) {
+            ParameterElement<int>::setTempValue(ParameterElement<int>::getTempValue() - curDigit);
         }
 
-        if (getValueLength() < getDigitLength()) fullUpdateCurDigit();
+        if (getTempValueLength() < getDigitLength()) fullUpdateCurDigit();
     };
 
     void incDigit() override {
-        if (getDigitLength() < getValueLength()) curDigit *= 10;
+        if (getDigitLength() < getTempValueLength()) curDigit *= 10;
         else curDigit = 1;
     };
 
     void fullUpdateCurDigit() {
-        curDigit = pow(10, getValueLength() - 1); // TODO unsafe, write your own function
+        curDigit = pow(10, getTempValueLength() - 1); // TODO unsafe, write your own function
     }
 
     void decDigit() override {
@@ -82,7 +82,7 @@ public:
     };
 
     bool isLastDigit() {
-        return getDigitLength() == getValueLength();
+        return getDigitLength() == getTempValueLength();
     }
 
     bool isValidForChange(int expectedValue) override {
@@ -91,23 +91,23 @@ public:
 
     void addNewDigitLeft() override {
 
-        int expectedValue = IndicatorElement<int>::getValue();
+        int expectedValue = ParameterElement<int>::getTempValue();
 
         if (expectedValue < 0) expectedValue -= curDigit * 10;
         else expectedValue += curDigit * 10;
 
         if (isValidForChange(expectedValue) && isLastDigit()) {
             curDigit *= 10;
-            IndicatorElement<int>::setValue(expectedValue);
+            ParameterElement<int>::setTempValue(expectedValue);
         }
     }
 
     std::string getEditViewValue() override {
 
-        std::string res = std::to_string(ParameterElement<int>::getValue());
-        int curDigitIndex = getValueLength() - std::to_string(curDigit).length();
+        std::string res = std::to_string(ParameterElement<int>::getTempValue());
+        int curDigitIndex = getTempValueLength() - std::to_string(curDigit).length();
 
-        if (ParameterElement<int>::getValue() < 0) curDigitIndex++;
+        if (ParameterElement<int>::getTempValue() < 0) curDigitIndex++;
         
         res.insert(curDigitIndex, "[");
         res.insert(curDigitIndex + 2, "]");

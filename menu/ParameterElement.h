@@ -9,7 +9,8 @@ class ParameterElement :
     public IndicatorElement<T>
 {
 protected:
-    T valueBackup;
+    // the value, we are changing and then applying
+    T tempValue;
     // for numeric parameters, maybe for text it won't be string but enum
     T minEditValue;
     T maxEditValue;
@@ -44,7 +45,15 @@ public:
         if (isEditMode)
             return IndicatorElement<T>::getElementName() + "\t" + getEditViewValue();
         // so we can differ P - parameter and I - indicator
-        return "[P] " + IndicatorElement<T>::getElementName() + "\t" + StrConverter::toString(IndicatorElement<T>::getValue());
+        return "[P] " + IndicatorElement<T>::getElementName() + "\t" + StrConverter::toString(isEditMode ? tempValue :IndicatorElement<T>::getValue());
+    }
+
+    T getTempValue() {
+        return tempValue;
+    }
+
+    void setTempValue(T other) {
+        tempValue = other;
     }
 
     std::string getPreview(bool isEditMode) override {
@@ -63,11 +72,21 @@ public:
     //
 
     void prepareForEditing() override {
-        valueBackup = IndicatorElement<T>::getValue();
-    };
+        tempValue = IndicatorElement<T>::getValue();
+    }
 
-    void cancelValueChanges() override {
-        IndicatorElement<T>::setValue(valueBackup);
+    /*void cancelValueChanges() override {
+        IndicatorElement<T>::setValue(tempValue);
+    }*/
+
+    void saveChanges() override {
+        IndicatorElement<T>::setValue(tempValue);
+        IndicatorElement<T>::saveChanges();
+    }
+
+    void injectStorage(SettingsStorageInterface* s) override {
+        IndicatorElement<T>::injectStorage(s);
+        tempValue = IndicatorElement<T>::getValue();
     }
 };
 

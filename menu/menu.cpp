@@ -24,7 +24,7 @@ int main() {
     Notifier* weightNotifier = new Notifier();
     PrettyNotifier* prettyNotifier = new PrettyNotifier();
     Win32Menu* menu = new Win32Menu(
-        new FolderElement("root", { new AbstractElement* [4] {
+        new FolderElement("root", { new AbstractElement* [2] {
                 new FolderElement("root1", { new AbstractElement* [1] {
                         new FolderElement("root2", { new AbstractElement* [1] {
                                 new FolderElement("root3", { new AbstractElement* [1] { new IntParameterElement("DOP", 450, 0, 1000) }, 1})
@@ -48,7 +48,7 @@ int main() {
                         new IndicatorElement<int>("B", 6),
                     }, 2}
                 )
-            }, 4 }),
+            }, 2 }),
         new TestStorage(std::time(0))
     );
 
@@ -107,6 +107,7 @@ int main() {
                     cntLeftPressed = 0;
                  }
         }
+        menu->refreshData();
         menu->update();
         Sleep(100);
     }

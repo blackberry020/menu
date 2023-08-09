@@ -22,7 +22,7 @@ FolderElement::FolderElement(std::string name, SettingsStorageInterface* storage
 
 // Display a current child
 std::string FolderElement::getContent(bool isEditMode) {
-	return "[" + getElementName() + "]\n\t-> " + getCurSubElement()->getPreview(isEditMode);
+	return getCurSubElement()->getPreview(isEditMode);
 }
 
 std::string FolderElement::getPreview(bool isEditMode) {

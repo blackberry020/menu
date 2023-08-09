@@ -16,6 +16,7 @@ private:
 	std::function<T(T, SettingsStorageInterface*)> recalculateFunction = [](T oldValue, SettingsStorageInterface*) { return oldValue; };
 	ElementSpeaker* elementSpeaker;
 	PrettyNotifier* prettyNotifier;
+	bool changed = false;
 
 protected:
 	ElementSpeaker* getElementSpeaker() {
@@ -88,13 +89,42 @@ public :
 		value = newValue;
 	}
 
+	// updating data from sensors
 	void updateElement() override {
-		// recalculating a value
-		value = recalculateFunction(value, getStorage());
+
+		if (getSubElements().size() == 0) {
+			T curValue = getStorage()->getValue(getElementName(), value);
+			if (curValue != value) {
+				prettyNotifier->notifyListeners(getElementName());
+				value = curValue;
+				changed = true;
+			}
+		}
+		else {
+			AbstractElement::updateElement();
+		}
 	}
 
-	void saveChanges() override {
+	// recalculating element if it neccessary
+	void recalculateElement() override {
+		if (getSubElements().size() == 0) {
+			if (changed && prettyNotifier != nullptr) {
+				value = recalculateFunction(value, getStorage());
+				changed = false;
+			}
+		}
+		else {
+			AbstractElement::recalculateElement();
+		}
+
+	}
+
+	virtual void saveChanges() override {
 		getStorage()->setValue(getElementName(), value);
+
+		// ????????????????????????????????????????????????????????????????????
+		// ???????? MAY BE NOTIFY ALL LISTENERS HERE, BEFORE NEXT TICK ????????
+		// ????????????????????????????????????????????????????????????????????
 	}
 
 	void dataChanged(std::string id) override {
@@ -141,10 +171,9 @@ public :
 		return getSubElements().size() != 0;
 	}
 
-	void injectStorage(SettingsStorageInterface* s) override {
+	virtual void injectStorage(SettingsStorageInterface* s) override {
 		AbstractElement::injectStorage(s);
 		value = getStorage()->getValue(getElementName(), value);
-		updateElement();
 	}
 
 	void injectPrettyNotifier(PrettyNotifier* notifier) {

@@ -13,6 +13,9 @@ private:
 	// abstract element also can have a sub element;
 	std::stack <AbstractElement*> openedElementsSequence;
 
+
+	FolderElement* rootFolder;
+
 	OutputDevice* outputDevice;
 
 	SettingsStorageInterface* storage;
@@ -29,6 +32,8 @@ public:
 	explicit MenuInterface(OutputDevice* oDevice, SettingsStorageInterface* _storage, FolderElement* rootFolder);
 
 	virtual void update();
+
+	void refreshData();
 
 	OutputDevice* getOutputDevice();
 
