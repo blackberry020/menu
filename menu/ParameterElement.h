@@ -16,22 +16,20 @@ protected:
     T maxEditValue;
 public:
 
-    ParameterElement(std::string name, T defaultValue, T minVal, T maxVal) : IndicatorElement<T>(name, defaultValue) {
-        minEditValue = minVal;
-        maxEditValue = maxVal;
-    };
+    //ParameterElement(std::string name, T defaultValue, T minVal, T maxVal) : IndicatorElement<T>(name, defaultValue) {
+    //    minEditValue = minVal;
+    //    maxEditValue = maxVal;
+    //};
 
     ParameterElement(
         std::string name,
         T defaultValue, 
         T minVal, 
         T maxVal,
-        ElementSpeaker* speaker,
         std::function<T(T, SettingsStorageInterface*)> _recalculateFunction = [](T v, SettingsStorageInterface*) { return v; }
     ) : IndicatorElement<T>(
         name,
         defaultValue,
-        speaker,
         _recalculateFunction
     ) {
         minEditValue = minVal;

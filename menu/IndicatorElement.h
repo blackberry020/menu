@@ -62,20 +62,19 @@ public :
 
 
 
-
+	// For sub elements, which will be recalculated
 	IndicatorElement(
 		std::string name,
 		T defaultValue,
-		ElementSpeaker* speaker,
 		std::function<T(T, SettingsStorageInterface*)> _recalculateFunction
 	)
 		: AbstractElement(name),
-		recalculateFunction(_recalculateFunction),
-		elementSpeaker(speaker)
+		recalculateFunction(_recalculateFunction)
 	{
 		value = defaultValue;
-		elementSpeaker->notifier->addElement(this);
 	}
+
+
 
 	
 
@@ -104,46 +103,23 @@ public :
 			AbstractElement::updateElement();
 		}
 	}
+	//
 
 	// recalculating element if it neccessary
-	void recalculateElement() override {
-		if (getSubElements().size() == 0) {
-			if (changed && prettyNotifier != nullptr) {
-				value = recalculateFunction(value, getStorage());
-				changed = false;
-			}
-		}
-		else {
-			AbstractElement::recalculateElement();
-		}
 
-	}
 
 	virtual void saveChanges() override {
 		getStorage()->setValue(getElementName(), value);
-
-		// ????????????????????????????????????????????????????????????????????
-		// ???????? MAY BE NOTIFY ALL LISTENERS HERE, BEFORE NEXT TICK ????????
-		// ????????????????????????????????????????????????????????????????????
 	}
 
 	void dataChanged(std::string id) override {
-
+		// We need recalculate THIS element, but SAVE TO STORAGE later
+		value = recalculateFunction(value, getStorage());
+		//recalculateElement();
 	}
 
 	// when is multiindicator (we are inside IndicatorElement)
 	std::string getContent(bool isEditMode) override {
-
-		//T curValue = getStorage()->getValue(getSubElements()[getCurIndexOfSubElement()]->getElementName(), value);
-		//if (curValue != value) {
-		//	//elementSpeaker->valueChanged();
-		//	if (prettyNotifier != nullptr)
-		//		prettyNotifier->notifyListeners(getElementName());
-		//}
-
-		// TODO:
-		// check in each child 
-
 		// Meow meow meow meow meow meow meow
 		// Meow Meow meow meow meow meow meow
 		// Meow meow Meow meow meow meow meow
@@ -151,12 +127,8 @@ public :
 		// Meow meow meow meow Meow meow meow
 		// Meow meow meow meow meow Meow meow
 		// Meow meow meow meow meow meow Meow 
-		// 
-		//value = curValue;
 
 		return getSubElements()[getCurIndexOfSubElement()]->getPreview(isEditMode);
-		
-		//return "[I] " + getElementName() + "\t" + StrConverter::toString(value);
 	}
 
 	std::string getPreview(bool isEditMode) override {

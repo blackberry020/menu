@@ -21,7 +21,6 @@ int main() {
     // EXAMPLE of Initializing CArray
     // CArray<int*> a = { new int* [3] {new int, new int, new int}, 3};
 
-    Notifier* weightNotifier = new Notifier();
     PrettyNotifier* prettyNotifier = new PrettyNotifier();
     Win32Menu* menu = new Win32Menu(
         new FolderElement("root", { new AbstractElement* [2] {
@@ -30,22 +29,10 @@ int main() {
                                 new FolderElement("root3", { new AbstractElement* [1] { new IntParameterElement("DOP", 450, 0, 1000) }, 1})
                             }, 1})
                     }, 1}),
-                /*new IntParameterElement(
-                    "MAX_WEIGHT", 0, 0, 1000,
-                    new ElementSpeaker(weightNotifier)),
-                new IntParameterElement(
-                    "CUR_WEIGHT", 0, 0, 1000,
-                    new ElementSpeaker(weightNotifier)),
-                new IndicatorElement<int>(
-                    "WEIGHT_LOAD", 0,
-                    new ElementSpeaker(weightNotifier),
-                    [](int oldValue, SettingsStorageInterface* storage) {
-                        return ((storage->getValue("CUR_WEIGHT", 0) / (double)storage->getValue("MAX_WEIGHT", 1)) * 100);
-                    }),*/
                 new IndicatorElement<int>(
                     "WEIGHT_LOAD", { new AbstractElement * [2] {
-                        new IndicatorElement<int>("A", 4),
-                        new IndicatorElement<int>("B", 6),
+                        new IndicatorElement<int>("WEIGHT_LOAD_A", 4),
+                        new IndicatorElement<int>("WEIGHT_LOAD_B", 6, [](int value, SettingsStorageInterface* settings) { return settings->getValue("WEIGHT_LOAD_A", 1) * 2; }),
                     }, 2}
                 )
             }, 2 }),

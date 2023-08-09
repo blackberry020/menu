@@ -17,7 +17,7 @@ void MenuInterface::refreshData()
 	// 2. Recalculate data depend on given info
 
 	rootFolder->updateElement();
-	rootFolder->recalculateElement();
+	//rootFolder->recalculateElement();
 }
 
 MenuInterface::MenuInterface(OutputDevice * oDevice, SettingsStorageInterface* _storage, FolderElement* _rootFolder) : 

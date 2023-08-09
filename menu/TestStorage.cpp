@@ -4,7 +4,8 @@ TestStorage::TestStorage(int _startTime) : startTime(_startTime){
     storageMap = {
         {"MAX_WEIGHT", 450},
         {"CUR_WEIGHT", 70},
-        {"WEIGHT_LOAD", 4},
+        {"WEIGHT_LOAD_A", 2324},
+        {"WEIGHT_LOAD_B", 3344},
     };
 }
 
@@ -12,6 +13,8 @@ int TestStorage::getValue(std::string id, int defaultValue)
 {
     if (id == "PI_TIMER")
         return std::time(0) - startTime;
+    if (id == "WEIGHT_LOAD_A")
+        return (std::time(0) - startTime);
     return storageMap[id];
 }
 

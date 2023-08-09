@@ -26,19 +26,14 @@ private:
     }
 
 public:
-
-    IntParameterElement(std::string name, int defaultValue, int minVal, int maxVal) :
-        ParameterElement<int>(name, defaultValue, minVal, maxVal) {};
-
     IntParameterElement(
         std::string name,
         int defaultValue,
         int minVal,
         int maxVal,
-        ElementSpeaker* speaker,
         std::function<int(int, SettingsStorageInterface*)> _recalculateFunction = [](int v, SettingsStorageInterface*) { return v; }
         ) :
-        ParameterElement<int>(name, defaultValue, minVal, maxVal, speaker, _recalculateFunction) {};
+        ParameterElement<int>(name, defaultValue, minVal, maxVal, _recalculateFunction) {};
 
     IntParameterElement(std::string name, int defaultValue, int _maxValueLength) :
         ParameterElement<int>(name, defaultValue, INT_MIN, INT_MAX),
