@@ -10,7 +10,6 @@
 #include "CArray.h"
 #include <fstream>
 #include <ctime>
-#include "ElementSpeaker.h"
 #include <functional>
 #include "CArray.h"
 #include "PrettyNotifier.h"

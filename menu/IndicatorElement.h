@@ -2,7 +2,6 @@
 #include "AbstractElement.h"
 #include "SettingsStorage.h"
 #include "StrConverter.h"
-#include "ElementSpeaker.h"
 #include <fstream>
 #include <functional>
 #include "PrettyNotifier.h"
@@ -14,14 +13,9 @@ class IndicatorElement : public AbstractElement
 private:
 	T value;
 	std::function<T(T, SettingsStorageInterface*)> recalculateFunction = [](T oldValue, SettingsStorageInterface*) { return oldValue; };
-	ElementSpeaker* elementSpeaker;
 	PrettyNotifier* prettyNotifier;
 	bool changed = false;
 
-protected:
-	ElementSpeaker* getElementSpeaker() {
-		return elementSpeaker;
-	}
 public :
 
 
@@ -73,10 +67,6 @@ public :
 	{
 		value = defaultValue;
 	}
-
-
-
-	
 
 	// ??? add constructor with children (multi-indicator)
 

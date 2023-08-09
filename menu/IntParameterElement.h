@@ -1,7 +1,6 @@
 #pragma once
 #include "ParameterElement.h"
 #include "math.h"
-#include "ElementSpeaker.h"
 #include <functional>
 class IntParameterElement :
     public ParameterElement<int>
