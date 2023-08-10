@@ -14,13 +14,14 @@ private:
 	SettingsStorageInterface* storage = nullptr;
 	int amountOfSubElements = 0;
 	int curIndexOfSubElement = 0;
+	bool recalculateAtStart;
 
 public :
 
 	// constuctors/destructor
 
 	// 1. just element, no children
-	explicit AbstractElement(std::string name);
+	explicit AbstractElement(std::string name, bool recalcAtStart);
 
 	// 2. element with children
 	explicit AbstractElement(std::string name, CArray <AbstractElement*> _subElements);
@@ -44,6 +45,10 @@ public :
 	SettingsStorageInterface* getStorage();
 	int getAmountOfSubElements();
 	int getCurIndexOfSubElement();
+	bool getRecalculateAtStartStatus();
+
+
+	void setRecalculateAtStartStatus(bool s);
 
 	//functions
 

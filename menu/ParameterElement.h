@@ -20,7 +20,7 @@ public:
 	ParameterElement(
 		std::string name,
 		T defaultValue, 
-		T minVal, 
+		T minVal,
 		T maxVal
 	) : IndicatorElement<T>(
 		name,
@@ -38,11 +38,13 @@ public:
 		T defaultValue,
 		T minVal,
 		T maxVal,
-		std::function<T(T, SettingsStorageInterface*)> recalculateFunction
+		std::function<T(T, SettingsStorageInterface*)> recalculateFunction,
+		bool recalcAtStart = false
 	) : IndicatorElement<T>(
 		name,
 		defaultValue,
-		recalculateFunction
+		recalculateFunction,
+		recalcAtStart
 	),
 		minEditValue(minVal),
 		maxEditValue(maxVal) {}
@@ -72,13 +74,15 @@ public:
 		T minVal,
 		T maxVal,
 		PrettyNotifier* prettyNotifier,
-		std::function<T(T, SettingsStorageInterface*)> recalculateFunction
+		std::function<T(T, SettingsStorageInterface*)> recalculateFunction,
+		bool recalcAtStart
 	)
 		: IndicatorElement<T>(
 			name,
 			defaultValue,
 			prettyNotifier,
-			recalculateFunction
+			recalculateFunction,
+			recalcAtStart
 		),
 		minEditValue(minVal),
 		maxEditValue(maxVal),

@@ -63,13 +63,15 @@ public:
         int defaultValue,
         int minVal,
         int maxVal,
-        std::function<int(int, SettingsStorageInterface*)> recalculateFunction
+        std::function<int(int, SettingsStorageInterface*)> recalculateFunction,
+        bool recalcAtStart = false
     ) : ParameterElement(
         name,
         defaultValue,
         minVal,
         maxVal,
-        recalculateFunction
+        recalculateFunction,
+        recalcAtStart
     ) {}
 
 

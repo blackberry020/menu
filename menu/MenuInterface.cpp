@@ -14,12 +14,12 @@ void MenuInterface::update() {
 void MenuInterface::refreshData()
 {
 	// 1. Update all data from sensors.
+	// 2. Save this data
 	// 2. Recalculate data depend on given info
 
 	rootFolder->updateElement();
 	rootFolder->saveChanges();
 	rootFolder->tryNotify();
-	//rootFolder->recalculateElement();
 }
 
 MenuInterface::MenuInterface(OutputDevice * oDevice, SettingsStorageInterface* _storage, FolderElement* _rootFolder) : 

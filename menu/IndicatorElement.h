@@ -20,7 +20,7 @@ public :
 
 
 	// If no sub elements
-	IndicatorElement(std::string name, T defaultValue) : AbstractElement(name) {
+	IndicatorElement(std::string name, T defaultValue) : AbstractElement(name, false) {
 		value = defaultValue;
 	}
 
@@ -29,9 +29,10 @@ public :
 	IndicatorElement(
 		std::string name,
 		T defaultValue,
-		std::function<T(T, SettingsStorageInterface*)> _recalculateFunction
+		std::function<T(T, SettingsStorageInterface*)> _recalculateFunction,
+		bool recalcAtStart = false
 	)
-		: AbstractElement(name),
+		: AbstractElement(name, recalcAtStart),
 		recalculateFunction(_recalculateFunction)
 	{
 		value = defaultValue;
@@ -42,9 +43,10 @@ public :
 		std::string name,
 		T defaultValue,
 		PrettyNotifier* _prettyNotifier,
-		std::function<T(T, SettingsStorageInterface*)> _recalculateFunction
+		std::function<T(T, SettingsStorageInterface*)> _recalculateFunction,
+		bool recalcAtStart = false
 	)
-		: AbstractElement(name),
+		: AbstractElement(name, recalcAtStart),
 		recalculateFunction(_recalculateFunction),
 		prettyNotifier(_prettyNotifier)
 	{
@@ -56,7 +58,7 @@ public :
 
 	// If no sub elements and connected prettyNotifier
 	IndicatorElement(std::string name, T defaultValue, PrettyNotifier* _prettyNotifier)
-		: AbstractElement(name), prettyNotifier(_prettyNotifier) {
+		: AbstractElement(name, false), prettyNotifier(_prettyNotifier) {
 		value = defaultValue;
 
 		prettyNotifier->addElement(this);
@@ -186,14 +188,14 @@ public :
 	}
 
 	void postInitRecalculation() override {
-
-		if (!isOpenable()) {
-			value = recalculateFunction(value, getStorage());
-			getStorage()->setValue(getElementName(), value);
-		}
-		else {
-			for (int i = 0; i < getSubElements().size(); i++) {
+		if (isOpenable())
+			for (int i = 0; i < getSubElements().size(); i++)
 				getSubElements()[i]->postInitRecalculation();
+
+		else {
+			if (getRecalculateAtStartStatus()) {
+				value = recalculateFunction(value, getStorage());
+				getStorage()->setValue(getElementName(), value);
 			}
 		}
 		

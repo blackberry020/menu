@@ -23,6 +23,10 @@ public:
 
 	};
 
+	CArray(int _length, T* _arr) : arr(_arr), length(_length) {
+
+	};
+
 	// Error with destructor !!!!!!!!!!!!
 	/*~CArray() {
 		delete arr;

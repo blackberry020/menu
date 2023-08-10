@@ -25,9 +25,8 @@ AbstractElement::~AbstractElement()
 	}
 }
 
-AbstractElement::AbstractElement(std::string name) :
-	elementName(name),
-	// empty subElements (no children)
+AbstractElement::AbstractElement(std::string name, bool recalcAtStart) :
+	elementName(name), recalculateAtStart(recalcAtStart),
 	curIndexOfSubElement(0)
 {
 
@@ -61,6 +60,14 @@ int AbstractElement::getAmountOfSubElements() {
 
 int AbstractElement::getCurIndexOfSubElement() {
 	return curIndexOfSubElement;
+}
+bool AbstractElement::getRecalculateAtStartStatus()
+{
+	return recalculateAtStart;
+}
+void AbstractElement::setRecalculateAtStartStatus(bool s)
+{
+	recalculateAtStart = s;
 }
 void AbstractElement::updateElement()
 {
