@@ -1,7 +1,7 @@
 #pragma once
 
 template <class T>
-class CVector {
+class CList {
 
 private:
 	struct Item {

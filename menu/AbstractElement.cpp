@@ -33,6 +33,16 @@ AbstractElement::AbstractElement(std::string name) :
 
 }
 
+std::string AbstractElement::getPrefix()
+{
+	return std::string();
+}
+
+std::string AbstractElement::getPostfix()
+{
+	return std::string();
+}
+
 std::string AbstractElement::getElementName() {
 	return elementName;
 }

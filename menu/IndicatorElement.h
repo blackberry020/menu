@@ -54,8 +54,6 @@ public :
 			getSubElements()[i]->injectPrettyNotifier(prettyNotifier);
 	}
 
-
-
 	// For sub elements, which will be recalculated
 	IndicatorElement(
 		std::string name,
@@ -67,8 +65,6 @@ public :
 	{
 		value = defaultValue;
 	}
-
-	// ??? add constructor with children (multi-indicator)
 
 	T getValue() {
 		return value;
@@ -98,38 +94,36 @@ public :
 	// recalculating element if it neccessary
 
 
+	virtual std::string getPrefix() override{
+		return "[I]";
+	}
+
 	virtual void saveChanges() override {
 		getStorage()->setValue(getElementName(), value);
 	}
 
 	void dataChanged(std::string id) override {
 		// We need recalculate THIS element, but SAVE TO STORAGE later
-		value = recalculateFunction(value, getStorage());
-		//recalculateElement();
+
+		// we just changed this element, so we dont need to recalculate it
+		if (id != getElementName())
+			value = recalculateFunction(value, getStorage());
 	}
 
 	// when is multiindicator (we are inside IndicatorElement)
 	std::string getContent(bool isEditMode) override {
-		// Meow meow meow meow meow meow meow
-		// Meow Meow meow meow meow meow meow
-		// Meow meow Meow meow meow meow meow
-		// Meow meow meow Meow meow meow meow
-		// Meow meow meow meow Meow meow meow
-		// Meow meow meow meow meow Meow meow
-		// Meow meow meow meow meow meow Meow 
-
 		return getSubElements()[getCurIndexOfSubElement()]->getPreview(isEditMode);
 	}
 
 	std::string getPreview(bool isEditMode) override {
-		return "[I] " +  getElementName() + (isOpenable() ? "" : ("\t" + StrConverter::toString(value)));
+		return getPrefix() + " " + getElementName() + (isOpenable() ? "" : ("\t" + StrConverter::toString(value) + getPostfix()));
 	}
 
 	// attrs
-	bool isEditable() override {
+	virtual bool isEditable() override {
 		return false;
 	}
-	bool isOpenable() override {
+	virtual bool isOpenable() override {
 		return getSubElements().size() != 0;
 	}
 

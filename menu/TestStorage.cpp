@@ -15,6 +15,9 @@ int TestStorage::getValue(std::string id, int defaultValue)
         return std::time(0) - startTime;
     if (id == "WEIGHT_LOAD_A")
         return (std::time(0) - startTime);
+    if (!storageMap.count(id))
+        storageMap[id] = defaultValue;
+
     return storageMap[id];
 }
 

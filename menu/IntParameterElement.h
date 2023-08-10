@@ -25,23 +25,68 @@ private:
     }
 
 public:
+
+    // If no sub elements
+    IntParameterElement(
+        std::string name,
+        int defaultValue,
+        int minVal,
+        int maxVal
+        ) :
+        ParameterElement<int>(name, defaultValue, minVal, maxVal) {};
+
+    // If no sub elements, but defined maxValueLengh
+    IntParameterElement(std::string name, int defaultValue, int _maxValueLength) :
+        ParameterElement<int>(name, defaultValue, INT_MIN, INT_MAX),
+        maxValueLength(_maxValueLength) {};
+
+    // If no sub elements and connected prettyNotifier
     IntParameterElement(
         std::string name,
         int defaultValue,
         int minVal,
         int maxVal,
-        std::function<int(int, SettingsStorageInterface*)> _recalculateFunction = [](int v, SettingsStorageInterface*) { return v; }
-        ) :
-        ParameterElement<int>(name, defaultValue, minVal, maxVal, _recalculateFunction) {};
+        PrettyNotifier* prettyNotifier
+    ) :
+        ParameterElement<int>(
+            name,
+            defaultValue,
+            minVal,
+            maxVal,
+            prettyNotifier
+        ) {};
 
-    IntParameterElement(std::string name, int defaultValue, int _maxValueLength) :
-        ParameterElement<int>(name, defaultValue, INT_MIN, INT_MAX),
-        maxValueLength(_maxValueLength) {};
+    // If there are sub elements
+    IntParameterElement(
+        std::string name,
+        CArray<AbstractElement*> subEl
+    )
+        : ParameterElement(
+            name,
+            subEl
+        ) {}
+    
+    // If there are sub elements and notifier
+    IntParameterElement(
+        std::string name,
+        PrettyNotifier* prettyNotifier,
+        CArray<AbstractElement*> subEl
+    ) : ParameterElement(
+        name,
+        prettyNotifier,
+        subEl
+    ) {}
 
-    /*void prepareForEditing() override {
-        ParameterElement<int>::prepareForEditing();
-        curDigit = 1;
-    };*/
+    // For sub elements, which will be recalculated
+    IntParameterElement(
+        std::string name,
+        int defaultValue,
+        std::function<int(int, SettingsStorageInterface*)> recalculateFunction
+    ) : ParameterElement(
+        name,
+        defaultValue,
+        recalculateFunction
+    ) {}
 
     void incCurValueDigit() override {
         

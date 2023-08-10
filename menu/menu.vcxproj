@@ -144,7 +144,7 @@
   <ItemGroup>
     <ClInclude Include="AbstractElement.h" />
     <ClInclude Include="CArray.h" />
-    <ClInclude Include="CVector.h" />
+    <ClInclude Include="CList.h" />
     <ClInclude Include="FolderElement.h" />
     <ClInclude Include="Key.h" />
     <ClInclude Include="IndicatorElement.h" />

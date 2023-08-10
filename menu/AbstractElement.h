@@ -35,6 +35,8 @@ public :
 	virtual bool isEditable() = 0;
 	virtual bool isOpenable() = 0;
 
+	virtual std::string getPrefix();
+	virtual std::string getPostfix();
 
 	// getters
 	std::string getElementName();

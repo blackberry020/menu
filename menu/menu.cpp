@@ -22,19 +22,31 @@ int main() {
 
     PrettyNotifier* prettyNotifier = new PrettyNotifier();
     Win32Menu* menu = new Win32Menu(
-        new FolderElement("root", { new AbstractElement* [2] {
+        new FolderElement("root", { new AbstractElement* [3] {
                 new FolderElement("root1", { new AbstractElement* [1] {
                         new FolderElement("root2", { new AbstractElement* [1] {
                                 new FolderElement("root3", { new AbstractElement* [1] { new IntParameterElement("DOP", 450, 0, 1000) }, 1})
                             }, 1})
                     }, 1}),
+                new IntParameterElement(
+                    "WEIGHT_EXTRA", 200, 0, 5000),
                 new IndicatorElement<int>(
-                    "WEIGHT_LOAD", { new AbstractElement * [2] {
+                    "WEIGHT_LOAD", { new AbstractElement * [3] {
+                        new IndicatorElement<int>("WEIGHT_LOAD_TOTAL", 4, [](
+                            int value, SettingsStorageInterface* settings) {
+                                return  
+                                    settings->getValue("WEIGHT_LOAD_A", 1) +
+                                    settings->getValue("WEIGHT_LOAD_B", 1) +
+                                    settings->getValue("WEIGHT_EXTRA", 1);
+                            }),
                         new IndicatorElement<int>("WEIGHT_LOAD_A", 4),
-                        new IndicatorElement<int>("WEIGHT_LOAD_B", 6, [](int value, SettingsStorageInterface* settings) { return settings->getValue("WEIGHT_LOAD_A", 1) * 2; }),
-                    }, 2}
+                        new IndicatorElement<int>("WEIGHT_LOAD_B", 6, [](int value, SettingsStorageInterface* settings) {
+                                return settings->getValue("WEIGHT_LOAD_A", 1) * 10; 
+                            }
+                        ),
+                    }, 3}
                 )
-            }, 2 }),
+            }, 3 }),
         new TestStorage(std::time(0))
     );
 
