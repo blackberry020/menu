@@ -4,6 +4,13 @@ bool FolderElement::isOpenable() {
 	return true;
 }
 
+void FolderElement::postInitRecalculation()
+{
+	for (int i = 0; i < getSubElements().size(); i++) {
+		getSubElements()[i]->postInitRecalculation();
+	}
+}
+
 bool FolderElement::isEditable() {
 	return false;
 }

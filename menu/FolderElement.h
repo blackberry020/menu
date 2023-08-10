@@ -14,4 +14,6 @@ public:
     // attrs
     bool isEditable() override;
     bool isOpenable() override;
+
+    void postInitRecalculation() override;
 };

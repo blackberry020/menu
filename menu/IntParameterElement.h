@@ -56,6 +56,23 @@ public:
             prettyNotifier
         ) {};
 
+    // If no sub elements
+    // which will be recalculated
+    IntParameterElement(
+        std::string name,
+        int defaultValue,
+        int minVal,
+        int maxVal,
+        std::function<int(int, SettingsStorageInterface*)> recalculateFunction
+    ) : ParameterElement(
+        name,
+        defaultValue,
+        minVal,
+        maxVal,
+        recalculateFunction
+    ) {}
+
+
     // If there are sub elements
     IntParameterElement(
         std::string name,
@@ -75,17 +92,6 @@ public:
         name,
         prettyNotifier,
         subEl
-    ) {}
-
-    // For sub elements, which will be recalculated
-    IntParameterElement(
-        std::string name,
-        int defaultValue,
-        std::function<int(int, SettingsStorageInterface*)> recalculateFunction
-    ) : ParameterElement(
-        name,
-        defaultValue,
-        recalculateFunction
     ) {}
 
     void incCurValueDigit() override {

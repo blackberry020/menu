@@ -24,6 +24,36 @@ public :
 		value = defaultValue;
 	}
 
+	// If no sub elements
+	// which will be recalculated
+	IndicatorElement(
+		std::string name,
+		T defaultValue,
+		std::function<T(T, SettingsStorageInterface*)> _recalculateFunction
+	)
+		: AbstractElement(name),
+		recalculateFunction(_recalculateFunction)
+	{
+		value = defaultValue;
+	}
+
+	// IF no sub elements, but have notifier
+	IndicatorElement(
+		std::string name,
+		T defaultValue,
+		PrettyNotifier* _prettyNotifier,
+		std::function<T(T, SettingsStorageInterface*)> _recalculateFunction
+	)
+		: AbstractElement(name),
+		recalculateFunction(_recalculateFunction),
+		prettyNotifier(_prettyNotifier)
+	{
+		value = defaultValue;
+
+		prettyNotifier->addElement(this);
+	}
+
+
 	// If no sub elements and connected prettyNotifier
 	IndicatorElement(std::string name, T defaultValue, PrettyNotifier* _prettyNotifier)
 		: AbstractElement(name), prettyNotifier(_prettyNotifier) {
@@ -33,6 +63,7 @@ public :
 	}
 
 	// If there are sub elements
+	// Only sub elements are connected
 	IndicatorElement(std::string name, CArray<AbstractElement*> subEl) :
 		AbstractElement(name, subEl) {
 
@@ -54,18 +85,9 @@ public :
 			getSubElements()[i]->injectPrettyNotifier(prettyNotifier);
 	}
 
-	// For sub elements, which will be recalculated
-	IndicatorElement(
-		std::string name,
-		T defaultValue,
-		std::function<T(T, SettingsStorageInterface*)> _recalculateFunction
-	)
-		: AbstractElement(name),
-		recalculateFunction(_recalculateFunction)
-	{
-		value = defaultValue;
+	PrettyNotifier* getPrettyNotifier() {
+		return prettyNotifier;
 	}
-
 	T getValue() {
 		return value;
 	}
@@ -80,7 +102,6 @@ public :
 		if (getSubElements().size() == 0) {
 			T curValue = getStorage()->getValue(getElementName(), value);
 			if (curValue != value) {
-				prettyNotifier->notifyListeners(getElementName());
 				value = curValue;
 				changed = true;
 			}
@@ -88,6 +109,14 @@ public :
 		else {
 			AbstractElement::updateElement();
 		}
+	}
+	void setChangeStatus(bool other) {
+		changed = other;
+	}
+	void tryNotify() override {
+		if (changed && prettyNotifier != nullptr)
+			prettyNotifier->notifyListeners(getElementName());
+		changed = false;
 	}
 	//
 
@@ -99,15 +128,23 @@ public :
 	}
 
 	virtual void saveChanges() override {
-		getStorage()->setValue(getElementName(), value);
+		// ????????????????????????????????????????????????
+		if (changed) {
+			getStorage()->setValue(getElementName(), value);
+			changed = false;
+		}
 	}
 
 	void dataChanged(std::string id) override {
 		// We need recalculate THIS element, but SAVE TO STORAGE later
 
 		// we just changed this element, so we dont need to recalculate it
-		if (id != getElementName())
+		if (id != getElementName()) {
 			value = recalculateFunction(value, getStorage());
+
+			// Value may be not changed
+			changed = true;
+		}
 	}
 
 	// when is multiindicator (we are inside IndicatorElement)
@@ -129,17 +166,37 @@ public :
 
 	virtual void injectStorage(SettingsStorageInterface* s) override {
 		AbstractElement::injectStorage(s);
+
+		// trying to get
 		value = getStorage()->getValue(getElementName(), value);
+
+		// and saving in storage
+		getStorage()->setValue(getElementName(), value);
 	}
 
 	void injectPrettyNotifier(PrettyNotifier* notifier) {
 		prettyNotifier = notifier;
+
 		if (getSubElements().size() == 0) {
 			prettyNotifier->addElement(this);
 		}
 		else
 			for (int i = 0; i < getSubElements().size(); i++)
 				getSubElements()[i]->injectPrettyNotifier(prettyNotifier);
+	}
+
+	void postInitRecalculation() override {
+
+		if (!isOpenable()) {
+			value = recalculateFunction(value, getStorage());
+			getStorage()->setValue(getElementName(), value);
+		}
+		else {
+			for (int i = 0; i < getSubElements().size(); i++) {
+				getSubElements()[i]->postInitRecalculation();
+			}
+		}
+		
 	}
 
 	

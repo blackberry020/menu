@@ -22,31 +22,29 @@ int main() {
 
     PrettyNotifier* prettyNotifier = new PrettyNotifier();
     Win32Menu* menu = new Win32Menu(
-        new FolderElement("root", { new AbstractElement* [3] {
+        new FolderElement("root", { new AbstractElement* [2] {
                 new FolderElement("root1", { new AbstractElement* [1] {
                         new FolderElement("root2", { new AbstractElement* [1] {
                                 new FolderElement("root3", { new AbstractElement* [1] { new IntParameterElement("DOP", 450, 0, 1000) }, 1})
                             }, 1})
                     }, 1}),
-                new IntParameterElement(
-                    "WEIGHT_EXTRA", 200, 0, 5000),
+                /*new IndicatorElement<int>(
+                    "PI_TIMER", 0, prettyNotifier),
                 new IndicatorElement<int>(
-                    "WEIGHT_LOAD", { new AbstractElement * [3] {
-                        new IndicatorElement<int>("WEIGHT_LOAD_TOTAL", 4, [](
-                            int value, SettingsStorageInterface* settings) {
-                                return  
-                                    settings->getValue("WEIGHT_LOAD_A", 1) +
-                                    settings->getValue("WEIGHT_LOAD_B", 1) +
-                                    settings->getValue("WEIGHT_EXTRA", 1);
+                    "PI_TIMER_X2", 0, prettyNotifier, [](int value, SettingsStorageInterface* settings) {
+                        return settings->getValue("PI_TIMER", 0) * 2;
+                    }),*/
+                new IntParameterElement(
+                    "WEIGHT_LOAD",
+                    {new AbstractElement * [3] {
+                        new IntParameterElement("WEIGHT_MAX", 1455, 0, 2000),
+                        new IntParameterElement("WEIGHT_CUR", 300, 0, 2000),
+                        new IntParameterElement("WEIGHT_LOAD_PERCENTAGE", 0, 0, 100, [](int value, SettingsStorageInterface* storage){
+                                return (storage->getValue("WEIGHT_CUR", 1) / (double)storage->getValue("WEIGHT_MAX", 1)) * 100;
                             }),
-                        new IndicatorElement<int>("WEIGHT_LOAD_A", 4),
-                        new IndicatorElement<int>("WEIGHT_LOAD_B", 6, [](int value, SettingsStorageInterface* settings) {
-                                return settings->getValue("WEIGHT_LOAD_A", 1) * 10; 
-                            }
-                        ),
                     }, 3}
                 )
-            }, 3 }),
+            }, 2 }),
         new TestStorage(std::time(0))
     );
 

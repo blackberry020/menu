@@ -54,6 +54,11 @@ public :
 	virtual void dataChanged(std::string changedId) override;
 	virtual void saveChanges() override;
 
+	// for PARAMETERS
+	virtual void applyChanges();
+
+	virtual void tryNotify();
+
 	virtual std::string getContent(bool isEditMode) = 0;
 	virtual std::string getPreview(bool isEditMode) = 0;
 
@@ -77,6 +82,9 @@ public :
 	//injection function for this element and all children
 	//??????? mem optimization ?????????
 	virtual void injectStorage(SettingsStorageInterface* storageInterface);
+
+	// apply recalculate function after each object initialization
+	virtual void postInitRecalculation();
 
 	// for sub elements !!!
 	bool requestEditModeSubElement();

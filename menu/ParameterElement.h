@@ -30,6 +30,24 @@ public:
 		maxEditValue(maxVal),
 		tempValue(IndicatorElement<T>::getValue()) {}
 
+
+	// If no sub elements
+	// For sub elements, which will be recalculated
+	ParameterElement(
+		std::string name,
+		T defaultValue,
+		T minVal,
+		T maxVal,
+		std::function<T(T, SettingsStorageInterface*)> recalculateFunction
+	) : IndicatorElement<T>(
+		name,
+		defaultValue,
+		recalculateFunction
+	),
+		minEditValue(minVal),
+		maxEditValue(maxVal) {}
+
+
 	// If no sub elements and connected prettyNotifier
 	ParameterElement(
 		std::string name,
@@ -42,6 +60,25 @@ public:
 			name,
 			defaultValue,
 			prettyNotifier
+		),
+		minEditValue(minVal),
+		maxEditValue(maxVal),
+		tempValue(IndicatorElement<T>::getValue()) {}
+
+	// If no sub elements and connected prettyNotifier
+	ParameterElement(
+		std::string name,
+		T defaultValue,
+		T minVal,
+		T maxVal,
+		PrettyNotifier* prettyNotifier,
+		std::function<T(T, SettingsStorageInterface*)> recalculateFunction
+	)
+		: IndicatorElement<T>(
+			name,
+			defaultValue,
+			prettyNotifier,
+			recalculateFunction
 		),
 		minEditValue(minVal),
 		maxEditValue(maxVal),
@@ -70,16 +107,7 @@ public:
 			subEl
 		) {}
 	
-	// For sub elements, which will be recalculated
-	ParameterElement(
-		std::string name,
-		T defaultValue,
-		std::function<T(T, SettingsStorageInterface*)> recalculateFunction
-	) : IndicatorElement<T>(
-		name,
-		defaultValue,
-		recalculateFunction
-	) {}
+	
 
 	
 	virtual std::string getEditViewValue() = 0;
@@ -100,7 +128,7 @@ public:
 			return getPrefix() + " " + IndicatorElement<T>::getElementName() + "\t" + StrConverter::toString(isEditMode ? tempValue : IndicatorElement<T>::getValue());
 		}
 
-		return IndicatorElement<T>::getContent(isEditMode);
+		return IndicatorElement<T>::getPreview(isEditMode);
 	}
 	
 	T getTempValue() {
@@ -110,27 +138,21 @@ public:
 	void setTempValue(T other) {
 		tempValue = other;
 	}
-
-	
 	
 
 	bool isEditable() override {
 		return IndicatorElement<T>::getSubElements().size() == 0;
 	}
-	
-	//
 
 	void prepareForEditing() override {
 		tempValue = IndicatorElement<T>::getValue();
 	}
 
-	/*void cancelValueChanges() override {
+	void applyChanges() override {
 		IndicatorElement<T>::setValue(tempValue);
-	}*/
-
-	void saveChanges() override {
-		IndicatorElement<T>::setValue(tempValue);
+		IndicatorElement<T>::setChangeStatus(true);
 		IndicatorElement<T>::saveChanges();
+		IndicatorElement<T>::getPrettyNotifier()->notifyListeners(IndicatorElement<T>::getElementName());
 	}
 
 	void injectStorage(SettingsStorageInterface* s) override {

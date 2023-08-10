@@ -7,10 +7,12 @@ private:
 	std::vector<ObservableObject*> elements;
 public:
 	void notifyListeners(std::string id) {
-		for (auto el : elements)
-			el->dataChanged(id);
-		for (auto el : elements)
-			el->saveChanges();
+		if (elements.size() > 0) {
+			for (auto el : elements)
+				el->dataChanged(id);
+			for (auto el : elements)
+				el->saveChanges();
+		}
 	}
 
 	void addElement(ObservableObject* obj) {

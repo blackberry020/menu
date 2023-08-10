@@ -102,7 +102,16 @@ void AbstractElement::addNewDigitLeft() {
 
 void AbstractElement::saveChanges()
 {
-	// no reaction by default
+	for (int i = 0; i < subElements.size(); i++)
+		subElements[i]->saveChanges();
+}
+void AbstractElement::applyChanges()
+{
+}
+void AbstractElement::tryNotify()
+{
+	for (int i = 0; i < subElements.size(); i++)
+		subElements[i]->tryNotify();
 }
 ;
 
@@ -129,6 +138,10 @@ void AbstractElement::injectStorage(SettingsStorageInterface* storageInterface)
 	for (int i = 0; i < subElements.size(); i++) {
 		subElements[i]->injectStorage(storage);
 	}
+}
+
+void AbstractElement::postInitRecalculation()
+{
 }
 
 // for sub elements !!!

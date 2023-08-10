@@ -17,6 +17,8 @@ void MenuInterface::refreshData()
 	// 2. Recalculate data depend on given info
 
 	rootFolder->updateElement();
+	rootFolder->saveChanges();
+	rootFolder->tryNotify();
 	//rootFolder->recalculateElement();
 }
 
@@ -28,6 +30,7 @@ MenuInterface::MenuInterface(OutputDevice * oDevice, SettingsStorageInterface* _
 
 	// root folder is always opened
 	rootFolder->injectStorage(storage);
+	rootFolder->postInitRecalculation();
 	openedElementsSequence.push(rootFolder);
 	update();
 }
@@ -100,7 +103,7 @@ void MenuInterface::keyPressed(Key key) {
 
 			case Key::Enter:
 				isEditMode = false;
-				curElement->getCurSubElement()->saveChanges();
+				curElement->getCurSubElement()->applyChanges();
 				break;
 
 			default:
