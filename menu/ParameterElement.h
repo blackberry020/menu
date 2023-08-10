@@ -156,7 +156,7 @@ public:
 		IndicatorElement<T>::setValue(tempValue);
 		IndicatorElement<T>::setChangeStatus(true);
 		IndicatorElement<T>::saveChanges();
-		IndicatorElement<T>::getPrettyNotifier()->notifyListeners(IndicatorElement<T>::getElementName());
+		IndicatorElement<T>::tryNotify();
 	}
 
 	void injectStorage(SettingsStorageInterface* s) override {

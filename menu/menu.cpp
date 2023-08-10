@@ -22,28 +22,28 @@ int main() {
 
     PrettyNotifier* prettyNotifier = new PrettyNotifier();
     Win32Menu* menu = new Win32Menu(
-        new FolderElement("root", { 2, new AbstractElement* [2] {
+        new FolderElement("root", { 4, new AbstractElement* [4] {
                 new FolderElement("root1", { 1, new AbstractElement* [1] {
                         new FolderElement("root2", { 1, new AbstractElement* [1] {
                                 new FolderElement("root3", { 1, new AbstractElement* [1] { new IntParameterElement("DOP", 450, 0, 1000) }})
                             }})
                     }}),
-                /*new IndicatorElement<int>(
+                new IndicatorElement<int>(
                     "PI_TIMER", 0, prettyNotifier),
                 new IndicatorElement<int>(
                     "PI_TIMER_X2", 0, prettyNotifier, [](int value, SettingsStorageInterface* settings) {
                         return settings->getValue("PI_TIMER", 0) * 2;
-                    }),*/
+                    }),
                 new IntParameterElement(
                     "WEIGHT_LOAD",
                     { 3, new AbstractElement * [3] {
                         new IntParameterElement("WEIGHT_MAX", 1455, 0, 2000),
                         new IntParameterElement("WEIGHT_CUR", 300, 0, 2000, [](int value, SettingsStorageInterface* storage) {
-                            return (int)((storage->getValue("WEIGHT_CUR", 1) * (double)storage->getValue("WEIGHT_MAX", 1)) / 100);
+                            return (int)((storage->getValue("WEIGHT_PERCENTAGE", 1) * (double)storage->getValue("WEIGHT_MAX", 1)));
                         }),
                         new IntParameterElement("WEIGHT_LOAD_PERCENTAGE", 0, 0, 100, [](int value, SettingsStorageInterface* storage){
                                 return (storage->getValue("WEIGHT_CUR", 1) / (double)storage->getValue("WEIGHT_MAX", 1)) * 100;
-                            }, true),
+                        }, true),
                     }}
                 )
             }}),

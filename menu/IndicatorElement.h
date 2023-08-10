@@ -131,10 +131,9 @@ public :
 
 	virtual void saveChanges() override {
 		// ????????????????????????????????????????????????
-		if (changed) {
+		if (changed)
 			getStorage()->setValue(getElementName(), value);
-			changed = false;
-		}
+		
 	}
 
 	void dataChanged(std::string id) override {
@@ -142,10 +141,16 @@ public :
 
 		// we just changed this element, so we dont need to recalculate it
 		if (id != getElementName()) {
-			value = recalculateFunction(value, getStorage());
-
-			// Value may be not changed
-			changed = true;
+			T curValue = recalculateFunction(value, getStorage());
+			if (curValue != value) {
+				changed = true;
+				value = curValue;
+			}
+			else {
+				changed = false;
+			}
+				
+			
 		}
 	}
 
