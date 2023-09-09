@@ -38,9 +38,7 @@ int main() {
                     "WEIGHT_LOAD",
                     { 3, new AbstractElement * [3] {
                         new IntParameterElement("WEIGHT_MAX", 1455, 0, 2000),
-                        new IntParameterElement("WEIGHT_CUR", 300, 0, 2000, [](int value, SettingsStorageInterface* storage) {
-                            return (int)((storage->getValue("WEIGHT_PERCENTAGE", 1) * (double)storage->getValue("WEIGHT_MAX", 1)));
-                        }),
+                        new IntParameterElement("WEIGHT_CUR", 300, 0, 2000),
                         new IntParameterElement("WEIGHT_LOAD_PERCENTAGE", 0, 0, 100, [](int value, SettingsStorageInterface* storage){
                                 return (storage->getValue("WEIGHT_CUR", 1) / (double)storage->getValue("WEIGHT_MAX", 1)) * 100;
                         }, true),

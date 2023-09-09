@@ -2,8 +2,7 @@
 #include <fstream>
 using namespace std;
 
-// collect data from models
-// update output device state;
+
 void MenuInterface::update() {
 	outputDevice <<
 		getInstructions() + "\n" +
@@ -13,10 +12,6 @@ void MenuInterface::update() {
 
 void MenuInterface::refreshData()
 {
-	// 1. Update all data from sensors.
-	// 2. Save this data
-	// 2. Recalculate data depend on given info
-
 	rootFolder->updateElement();
 	rootFolder->saveChanges();
 	rootFolder->tryNotify();
@@ -42,9 +37,9 @@ OutputDevice* MenuInterface::getOutputDevice()
 }
 
 const std::string MenuInterface::getInstructions() {
-	return "use arrows for navigation:"
+	return "use arrows, Enter & Esc for navigation:"
 		"\n left and right for moving between folders on the same level, "
-		"\n down and up for moving between layers"
+		"\n Enter and Esc for moving between layers"
 		"\n enter to edit a value"
 		"\n ESC to undo changes in value"
 		"\n and arrows for editing value's digits"

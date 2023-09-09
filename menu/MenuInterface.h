@@ -10,17 +10,13 @@ class MenuInterface
 
 private:
 
-	// abstract element also can have a sub element;
 	std::stack <AbstractElement*> openedElementsSequence;
-
-
 	FolderElement* rootFolder;
-
 	OutputDevice* outputDevice;
-
 	SettingsStorageInterface* storage;
 
 	bool isEditMode;
+
 protected:
 
 	virtual const std::string getInstructions();
